@@ -35,6 +35,10 @@ execute pathogen#infect()
 "YouCompleteMe
 let g:ycm_global_ycm_extra_conf = 'ycm_extra_conf.py'
 
+"Syntastic
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
 "Format syntax
 syntax on
 
