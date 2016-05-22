@@ -9,12 +9,20 @@ set shiftwidth=4
 set smarttab
 set noexpandtab
 set backspace=2
-set statusline=2
 set colorcolumn=100
 set mouse=a
 set hlsearch
 set cursorline "highlight current line
 
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %F%m%r%h\ %w\ \ Line:\ %l\ \ Column:\ %c
 set clipboard+=unnamed
 
 set nowrap "don't wrap lines
@@ -44,13 +52,13 @@ colorscheme molokai
 "Change line number color
 highlight LineNr ctermbg=233
 
-"Set background trasparent
+"Set background transparent
 "highlight Normal ctermbg=None
 
 "YouCompleteMe configuration file path
 let g:ycm_global_ycm_extra_conf = "~/.nvim/.ycm_extra_conf.py"
 
-"YCM dont use TAB key
+"YCM don't use TAB key
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
@@ -64,6 +72,10 @@ nmap <C-Up> :wincmd k<CR>
 nmap <C-Down> :wincmd j<CR>
 nmap <C-Left> :wincmd h<CR>
 nmap <C-Right> :wincmd l<CR>
+"nmap <S-Up> <Esc>10k
+"nmap <S-Down> <Esc>10j
+"imap <S-Up> <Esc>10k
+"imap <S-Down> <Esc>10j
 nmap <S-Left> <Esc>0
 nmap <S-Right> <Esc>$
 imap <S-Left> <Esc>0i
