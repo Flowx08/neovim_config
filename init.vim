@@ -72,6 +72,8 @@ nmap <C-Up> :wincmd k<CR>
 nmap <C-Down> :wincmd j<CR>
 nmap <C-Left> :wincmd h<CR>
 nmap <C-Right> :wincmd l<CR>
+nmap <C-k> :vertical resize -5<CR>
+nmap <C-l> :vertical resize +5<CR>
 "nmap <S-Up> <Esc>10k
 "nmap <S-Down> <Esc>10j
 "imap <S-Up> <Esc>10k
