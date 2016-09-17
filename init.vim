@@ -45,7 +45,8 @@ syntax on
 
 "Color scheme
 "colorscheme badwolf
-colorscheme mopkai
+"colorscheme mopkai
+colorscheme jelleybeans
 "colorscheme luna-term
 
 "Change line number color
