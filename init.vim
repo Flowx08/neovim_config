@@ -45,8 +45,8 @@ syntax on
 
 "Color scheme
 "colorscheme badwolf
-"colorscheme tender
-colorscheme luna-term
+colorscheme mopkai
+"colorscheme luna-term
 
 "Change line number color
 "highlight LineNr ctermbg=233
