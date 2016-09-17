@@ -40,27 +40,33 @@ set noswapfile
 "Pathogen
 execute pathogen#infect()
 
-"YouCompleteMe
-let g:ycm_global_ycm_extra_conf = 'ycm_extra_conf.py'
-
 "Format syntax
 syntax on
 
 "Color scheme
-colorscheme molokai
+"colorscheme badwolf
+"colorscheme tender
+colorscheme luna-term
 
 "Change line number color
-highlight LineNr ctermbg=233
+"highlight LineNr ctermbg=233
 
 "Set background transparent
 "highlight Normal ctermbg=None
 
-"YouCompleteMe configuration file path
-let g:ycm_global_ycm_extra_conf = "~/.nvim/.ycm_extra_conf.py"
+"clang_complete
+let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/"
+set conceallevel=2
+set concealcursor=vin
+let g:clang_snippets=1
+let g:clang_conceal_snippets=1
+let g:clang_snippets_engine='clang_complete'
 
-"YCM don't use TAB key
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+" Complete options (disable preview scratch window, longest removed to aways show menu)
+set completeopt=menu,menuone
+
+" Limit popup menu height
+set pumheight=20
 
 nmap <C-s> :w<cr>
 nmap <C-m> :make<cr>
@@ -72,12 +78,10 @@ nmap <C-Up> :wincmd k<CR>
 nmap <C-Down> :wincmd j<CR>
 nmap <C-Left> :wincmd h<CR>
 nmap <C-Right> :wincmd l<CR>
-nmap <C-k> :vertical resize -5<CR>
-nmap <C-l> :vertical resize +5<CR>
-"nmap <S-Up> <Esc>10k
-"nmap <S-Down> <Esc>10j
-"imap <S-Up> <Esc>10k
-"imap <S-Down> <Esc>10j
+"nmap <C-Up> <Esc><C-U>
+"nmap <C-Down> <Esc><C-D>
+"imap <C-Up> <Esc><C-U>
+"imap <C-Down> <Esc><C-D>
 nmap <S-Left> <Esc>0
 nmap <S-Right> <Esc>$
 imap <S-Left> <Esc>0i
