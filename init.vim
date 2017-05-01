@@ -34,6 +34,9 @@ set undolevels=1000	"use many much levels of undo
 set nobackup		
 set noswapfile
 
+"Higlight matching parenthesis
+set showmatch
+
 "Stay quite
 "set visualbell
 
@@ -56,8 +59,8 @@ colorscheme jelleybeans
 "highlight Normal ctermbg=None
 
 "clang_complete
-let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/"
-set conceallevel=2
+let g:clang_library_path="/usr/lib/llvm-3.8/lib/libclang.so.1"
+set conceallevel=0
 set concealcursor=vin
 let g:clang_snippets=1
 let g:clang_conceal_snippets=1
@@ -65,6 +68,9 @@ let g:clang_snippets_engine='clang_complete'
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
+
+"livepreview prewviewer
+let g:livepreview_previewer = 'evince'
 
 " Limit popup menu height
 set pumheight=20
