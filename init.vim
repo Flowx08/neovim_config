@@ -9,7 +9,7 @@ set shiftwidth=4
 set smarttab
 set noexpandtab
 set backspace=2
-set colorcolumn=100
+"set colorcolumn=100
 set mouse=a
 set hlsearch
 set cursorline "highlight current line
