@@ -26,10 +26,13 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-noremap h <NOP>
-noremap j <NOP>
-noremap k <NOP>
-noremap l <NOP>
+"noremap h <NOP>
+"noremap j <NOP>
+"noremap k <NOP>
+"noremap l <NOP>
+
+"autoresize pannels on resize event
+autocmd VimResized * exe "normal \<c-w>="
 
 " Format the status line
 set statusline=\ %F%m%r%h\ %w\ \ Line:\ %l\ \ Column:\ %c
