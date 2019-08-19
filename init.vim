@@ -18,8 +18,8 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-" Always show the status line
-set laststatus=2
+" Hide the status line
+set laststatus=1
 
 " HARDMODE
 noremap <Up> <NOP>
@@ -62,7 +62,8 @@ syntax on
 "Color scheme
 "colorscheme badwolf
 "colorscheme mopkai
-colorscheme jelleybeans
+"colorscheme jelleybeans
+colorscheme jelleybeans_flowx08
 "colorscheme luna-term
 
 "Change line number color
