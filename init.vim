@@ -80,11 +80,13 @@ let g:clang_snippets=1
 let g:clang_conceal_snippets=1
 let g:clang_snippets_engine='clang_complete'
 
-let g:ycm_auto_trigger = 1
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_min_num_identifier_candidate_chars = 0
-let g:ycm_mac_num_candidates = 50
-let g:ycm_max_num_identifier_candidates = 10
+"let g:loaded_youcompleteme = 1 "do not use youcompleteme
+"let g:ycm_auto_trigger = 1
+"let g:ycm_min_num_of_chars_for_completion = 2
+"let g:ycm_min_num_identifier_candidate_chars = 0
+"let g:ycm_mac_num_candidates = 50
+"let g:ycm_max_num_identifier_candidates = 10
+let g:ycm_rust_src_path="/home/flowx08/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/"
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
@@ -110,6 +112,7 @@ nmap <C-s> :w<cr>
 nmap <C-m> :make<cr>
 nmap <C-r> :%s/r1/r2/g
 nmap <C-b> :NERDTreeToggle<cr>
+nmap <C-g> :YcmCompleter GoToDefinition<cr>
 
 "Move between pannels with arrow keys 
 nmap <C-Up> :wincmd k<CR>
@@ -124,3 +127,6 @@ nmap <S-Left> <Esc>0
 nmap <S-Right> <Esc>$
 imap <S-Left> <Esc>0i
 imap <S-right> <Esc>$i
+
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
