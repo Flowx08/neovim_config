@@ -1,7 +1,8 @@
 set nocompatible
 set ruler
 
-set number
+"set number
+set nonumber
 set autoindent
 set tabstop=4
 set softtabstop=4
@@ -85,6 +86,7 @@ let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_min_num_identifier_candidate_chars = 0
 let g:ycm_mac_num_candidates = 50
 let g:ycm_max_num_identifier_candidates = 10
+let g:ycm_rust_src_path = '/Users/carlomeroni/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
@@ -98,6 +100,9 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" go lang bin path
+let g:go_bin_path = expand("/usr/local/go")
 
 
 "livepreview prewviewer
@@ -124,3 +129,17 @@ nmap <S-Left> <Esc>0
 nmap <S-Right> <Esc>$
 imap <S-Left> <Esc>0i
 imap <S-right> <Esc>$i
+
+"java autocompletion
+" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"
+set foldcolumn=2
+hi foldcolumn guibg=bg
+hi VertSplit guibg=bg guifg=bg
+
+" Set the vertical split character to  a space (there is a single space after '\ ')
+set fillchars+=vert:\ 
+
+" hide status bar
+hi StatusLine ctermbg=NONE
+
