@@ -115,6 +115,7 @@ nmap <C-s> :w<cr>
 nmap <C-m> :make<cr>
 nmap <C-r> :%s/r1/r2/g
 nmap <C-b> :NERDTreeToggle<cr>
+nmap <C-g> :YcmCompleter GoToDefinition<cr>
 
 "Move between pannels with arrow keys 
 nmap <C-Up> :wincmd k<CR>
@@ -142,4 +143,5 @@ set fillchars+=vert:\
 
 " hide status bar
 hi StatusLine ctermbg=NONE
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
