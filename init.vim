@@ -1,8 +1,8 @@
 set nocompatible
 set ruler
 
-"set number
-set nonumber
+set number
+"set nonumber
 set autoindent
 set tabstop=4
 set softtabstop=4
@@ -20,7 +20,11 @@ set si "Smart indent
 set wrap "Wrap lines
 
 " Hide the status line
-set laststatus=1
+" set laststatus=1
+set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
 
 " HARDMODE
 noremap <Up> <NOP>
@@ -54,9 +58,6 @@ set showmatch
 "Stay quite
 "set visualbell
 
-"Pathogen
-execute pathogen#infect()
-
 "Format syntax
 syntax on
 
@@ -67,11 +68,19 @@ syntax on
 colorscheme jelleybeans_flowx08
 "colorscheme luna-term
 
-"Change line number color
-"highlight LineNr ctermbg=233
+"Change color of current number
+hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
+
+"Dont highlight vertical line between buffers
+hi vertsplit guifg=fg guibg=bg
 
 "Set background transparent
-"highlight Normal ctermbg=None
+highlight LineNr ctermbg=NONE guibg=NONE
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+
+"Hide black lines ~ 
+hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
 
 "clang_complete
 let g:clang_library_path="/usr/lib/llvm-3.8/lib/libclang.so.1"
@@ -111,11 +120,23 @@ let g:livepreview_previewer = 'evince'
 " Limit popup menu height
 set pumheight=20
 
+" disable s key
+map s <Nop>
+
 nmap <C-s> :w<cr>
 nmap <C-m> :make<cr>
 nmap <C-r> :%s/r1/r2/g
-nmap <C-b> :NERDTreeToggle<cr>
+nmap <C-b> :NvimTreeToggle<cr>
 nmap <C-g> :YcmCompleter GoToDefinition<cr>
+
+" Find files using Telescope command-line sugar.
+map ff :Telescope find_files<cr>
+map <tt> :ToggleTerm<cr>
+map fl :HopWordCurrentLine<cr>
+map fk :HopWord<cr>
+map fj :HopLine<cr>
+map sk <C-u>
+map sj <C-d>
 
 "Move between pannels with arrow keys 
 nmap <C-Up> :wincmd k<CR>
@@ -126,22 +147,66 @@ nmap <C-Right> :wincmd l<CR>
 "nmap <C-Down> <Esc><C-D>
 "imap <C-Up> <Esc><C-U>
 "imap <C-Down> <Esc><C-D>
-nmap <S-Left> <Esc>0
-nmap <S-Right> <Esc>$
-imap <S-Left> <Esc>0i
-imap <S-right> <Esc>$i
 
 "java autocompletion
 " autocmd FileType java setlocal omnifunc=javacomplete#Complete
 "
-set foldcolumn=2
-hi foldcolumn guibg=bg
-hi VertSplit guibg=bg guifg=bg
-
 " Set the vertical split character to  a space (there is a single space after '\ ')
 set fillchars+=vert:\ 
 
 " hide status bar
 hi StatusLine ctermbg=NONE
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+Plug 'phaazon/hop.nvim'
+
+" Autocompletion plugin
+" ========================
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+" For luasnip users.
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'saadparwaiz1/cmp_luasnip'
+
+" For ultisnips users.
+" Plug 'SirVer/ultisnips'
+" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
+" For snippy users.
+" Plug 'dcampos/nvim-snippy'
+" Plug 'dcampos/cmp-snippy'
+
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+
+" For autocompletion plugin
+set completeopt=menu,menuone,noselect
+
+luafile /Users/carlo/.config/nvim/config.lua
