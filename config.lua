@@ -5,6 +5,10 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
+
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+
+
 -- empty setup using defaults
 require("nvim-tree").setup()
 
@@ -83,7 +87,11 @@ cmp.setup({
 			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 		end,
 	},
+	formatting = {
+		fields = {'menu', 'abbr', 'kind'}
+	},
 	window = {
+		documentation = cmp.config.window.bordered()
 		-- completion = cmp.config.window.bordered(),
 		-- documentation = cmp.config.window.bordered(),
 	},

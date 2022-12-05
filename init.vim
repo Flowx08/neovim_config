@@ -132,9 +132,8 @@ nmap <C-g> :YcmCompleter GoToDefinition<cr>
 " Find files using Telescope command-line sugar.
 map ff :Telescope find_files<cr>
 map <tt> :ToggleTerm<cr>
-map fl :HopWordCurrentLine<cr>
-map fk :HopWord<cr>
-map fj :HopLine<cr>
+map sl :HopWordCurrentLine<cr>
+map ss :HopWord<cr>
 map sk <C-u>
 map sj <C-d>
 
