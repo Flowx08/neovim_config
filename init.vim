@@ -90,29 +90,21 @@ let g:clang_snippets=1
 let g:clang_conceal_snippets=1
 let g:clang_snippets_engine='clang_complete'
 
-let g:ycm_auto_trigger = 1
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_min_num_identifier_candidate_chars = 0
-let g:ycm_mac_num_candidates = 50
-let g:ycm_max_num_identifier_candidates = 10
-let g:ycm_rust_src_path = '/Users/carlomeroni/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+" press <Tab> to expand or jump in a snippet. These can also be mapped separately
+" via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+" -1 for jumping backwards.
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 
-" Complete options (disable preview scratch window, longest removed to aways show menu)
-set completeopt=menu,menuone
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" For changing choices in choiceNodes (not strictly necessary for a basic setup).
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 
 " go lang bin path
 let g:go_bin_path = expand("/usr/local/go")
-
 
 "livepreview prewviewer
 let g:livepreview_previewer = 'evince'
@@ -131,11 +123,16 @@ nmap <C-g> :YcmCompleter GoToDefinition<cr>
 
 " Find files using Telescope command-line sugar.
 map ff :Telescope find_files<cr>
+map fs :Telescope lsp_document_symbols<cr>
+map fr :Telescope lsp_references<cr>
+map fe :Telescope diagnostics<cr>
 map <tt> :ToggleTerm<cr>
 map sl :HopWordCurrentLine<cr>
 map ss :HopWord<cr>
 map sk <C-u>
 map sj <C-d>
+map xl :bn<CR>
+map xh :bp<CR>
 
 "Move between pannels with arrow keys 
 nmap <C-Up> :wincmd k<CR>
@@ -176,6 +173,9 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'phaazon/hop.nvim'
 
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'rafamadriz/friendly-snippets'
+
 " Autocompletion plugin
 " ========================
 Plug 'neovim/nvim-lspconfig'
@@ -190,12 +190,12 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
 " For luasnip users.
-" Plug 'L3MON4D3/LuaSnip'
-" Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 " For ultisnips users.
-" Plug 'SirVer/ultisnips'
-" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+"Plug 'SirVer/ultisnips'
+"Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 " For snippy users.
 " Plug 'dcampos/nvim-snippy'
@@ -207,5 +207,6 @@ call plug#end()
 
 " For autocompletion plugin
 set completeopt=menu,menuone,noselect
+:
 
 luafile /Users/carlo/.config/nvim/config.lua
