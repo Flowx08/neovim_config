@@ -82,6 +82,17 @@ hi! NonText ctermbg=NONE guibg=NONE
 "Hide black lines ~ 
 hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
 
+"Tab background
+hi TabLineFill term=bold cterm=bold ctermbg=black
+hi TabLine ctermfg=white ctermbg=black
+hi TabLineSel ctermfg=white ctermbg=black
+hi Title ctermfg=white ctermbg=black
+hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
+hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
+
+" hide status bar
+hi StatusLine ctermbg=NONE
+
 "clang_complete
 let g:clang_library_path="/usr/lib/llvm-3.8/lib/libclang.so.1"
 set conceallevel=0
@@ -131,8 +142,12 @@ map sl :HopWordCurrentLine<cr>
 map ss :HopWord<cr>
 map sk <C-u>
 map sj <C-d>
-map xl :bn<CR>
-map xh :bp<CR>
+map gl :tabn<cr>
+map gh :tabp<cr>
+map gk :tabe<cr>
+map gq :tabc<cr>
+" map xl :bn<CR>
+" map xh :bp<CR>
 
 "Move between pannels with arrow keys 
 nmap <C-Up> :wincmd k<CR>
@@ -149,9 +164,6 @@ nmap <C-Right> :wincmd l<CR>
 "
 " Set the vertical split character to  a space (there is a single space after '\ ')
 set fillchars+=vert:\ 
-
-" hide status bar
-hi StatusLine ctermbg=NONE
 
 call plug#begin()
 " The default plugin directory will be as follows:
@@ -207,6 +219,5 @@ call plug#end()
 
 " For autocompletion plugin
 set completeopt=menu,menuone,noselect
-:
 
 luafile /Users/carlo/.config/nvim/config.lua
