@@ -4,11 +4,12 @@ set ruler
 set number
 "set nonumber
 set autoindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+"set softtabstop=4
+set shiftwidth=2
 set smarttab
-set noexpandtab
+set expandtab
+"set noexpandtab
 set backspace=2
 "set colorcolumn=100
 set mouse=a
@@ -146,6 +147,7 @@ map gl :tabn<cr>
 map gh :tabp<cr>
 map gk :tabe<cr>
 map gq :tabc<cr>
+map <C-e> :lua vim.diagnostic.open_float()<cr>
 " map xl :bn<CR>
 " map xh :bp<CR>
 

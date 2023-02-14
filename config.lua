@@ -1,8 +1,6 @@
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- set termguicolors to enable highlight groups
+vim.g.loaded_netrwPlugin = 1 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
 
@@ -146,8 +144,19 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Setup cland and python autocompletion
-require('lspconfig').clangd.setup{}
-require('lspconfig').pyright.setup{}
+local lspconfig = require("lspconfig")
+
+lspconfig.clangd.setup(
+{
+  cmd = {
+    "clangd",
+    "--completion-style=detailed",
+    "--header-insertion=never",
+  },
+})
+
+lspconfig.pyright.setup({})
+lspconfig.rust_analyzer.setup({})
 
 -- Setup hop
 require('hop').setup()
