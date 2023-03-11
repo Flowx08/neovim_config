@@ -94,6 +94,9 @@ hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=
 " hide status bar
 hi StatusLine ctermbg=NONE
 
+" Change color of sugn column (for syntax checks)
+hi SignColumn guibg=black
+
 "clang_complete
 let g:clang_library_path="/usr/lib/llvm-3.8/lib/libclang.so.1"
 set conceallevel=0
@@ -134,10 +137,10 @@ nmap <C-b> :NvimTreeToggle<cr>
 nmap <C-g> :YcmCompleter GoToDefinition<cr>
 
 " Find files using Telescope command-line sugar.
-map ff :Telescope find_files<cr>
-map fs :Telescope lsp_document_symbols<cr>
-map fr :Telescope lsp_references<cr>
-map fe :Telescope diagnostics<cr>
+map ff :Telescope find_files theme=dropdown<cr>
+map fs :Telescope lsp_document_symbols theme=ivy<cr>
+map fr :Telescope lsp_references theme=ivy<cr>
+map fe :Telescope diagnostics theme=ivy<cr>
 map <tt> :ToggleTerm<cr>
 map sl :HopWordCurrentLine<cr>
 map ss :HopWord<cr>
@@ -206,6 +209,9 @@ Plug 'hrsh7th/vim-vsnip'
 " For luasnip users.
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+
+" latex support
+Plug 'lervag/vimtex'
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
