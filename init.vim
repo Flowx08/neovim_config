@@ -213,6 +213,12 @@ Plug 'saadparwaiz1/cmp_luasnip'
 " latex support
 Plug 'lervag/vimtex'
 
+" Github copilot
+Plug 'github/copilot.vim'
+
+" Comment plugin
+Plug 'numToStr/Comment.nvim'
+
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
 "Plug 'quangnguyen30192/cmp-nvim-ultisnips'

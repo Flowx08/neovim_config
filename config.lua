@@ -6,6 +6,10 @@ vim.opt.termguicolors = true
 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
+-- Copilot setup
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 
 -- empty setup using defaults
 require("nvim-tree").setup()
@@ -160,6 +164,8 @@ lspconfig.rust_analyzer.setup({})
 
 -- Setup hop
 require('hop').setup()
-
 require('luasnip').filetype_extend("cpp", {"cpp"})
+
+-- Setup nvim-comment
+require('Comment').setup()
 
