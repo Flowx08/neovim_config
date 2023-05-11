@@ -161,6 +161,31 @@ lspconfig.clangd.setup(
 
 lspconfig.pyright.setup({})
 lspconfig.rust_analyzer.setup({})
+lspconfig.tsserver.setup({})
+lspconfig.glslls.setup({})
+
+lspconfig.lua_ls.setup({
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
 
 -- Setup hop
 require('hop').setup()
@@ -168,4 +193,13 @@ require('luasnip').filetype_extend("cpp", {"cpp"})
 
 -- Setup nvim-comment
 require('Comment').setup()
+
+-- todo comments
+require("todo-comments").setup()
+
+-- Setup persistent sessions
+require("persistence").setup()
+
+-- Setup bufferline
+require("bufferline").setup()
 

@@ -15,6 +15,7 @@ set backspace=2
 set mouse=a
 set hlsearch
 set cursorline "highlight current line
+"set scrolloff=9999 "keep cursor in the middle of the screen
 
 set ai "Auto indent
 set si "Smart indent
@@ -25,7 +26,11 @@ set wrap "Wrap lines
 set noshowmode
 set noruler
 set laststatus=0
-set noshowcmd
+ set noshowcmd
+
+" turn hybrid line numbers on
+" set number relativenumber
+" set nu rnu
 
 " HARDMODE
 noremap <Up> <NOP>
@@ -41,7 +46,7 @@ noremap <Right> <NOP>
 autocmd VimResized * exe "normal \<c-w>="
 
 " Format the status line
-set statusline=\ %F%m%r%h\ %w\ \ Line:\ %l\ \ Column:\ %c
+set statusline=\ %t
 set clipboard+=unnamed
 
 set nowrap "don't wrap lines
@@ -76,7 +81,7 @@ hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
 hi vertsplit guifg=fg guibg=bg
 
 "Set background transparent
-highlight LineNr ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE guifg=#444444
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
 
@@ -91,8 +96,12 @@ hi Title ctermfg=white ctermbg=black
 hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
 hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
 
+" Folding bacground color
+hi Folded guibg=#111111 ctermbg=black ctermfg=white guifg=#aaaaaa
+
 " hide status bar
-hi StatusLine ctermbg=NONE
+" hi StatusLine ctermbg=NONE
+highlight StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
 
 " Change color of sugn column (for syntax checks)
 hi SignColumn guibg=black
@@ -138,9 +147,14 @@ nmap <C-g> :YcmCompleter GoToDefinition<cr>
 
 " Find files using Telescope command-line sugar.
 map ff :Telescope find_files theme=dropdown<cr>
-map fs :Telescope lsp_document_symbols theme=ivy<cr>
+" map fs :Telescope lsp_document_symbols theme=ivy<cr>
 map fr :Telescope lsp_references theme=ivy<cr>
 map fe :Telescope diagnostics theme=ivy<cr>
+map ft :TodoTelescope<cr>
+map fl :bn<CR> 
+map fh :bp<CR>
+map fd :ClangdSwitchSourceHeader<CR>
+map fq :bd<CR>
 map <tt> :ToggleTerm<cr>
 map sl :HopWordCurrentLine<cr>
 map ss :HopWord<cr>
@@ -163,6 +177,58 @@ nmap <C-Right> :wincmd l<CR>
 "nmap <C-Down> <Esc><C-D>
 "imap <C-Up> <Esc><C-U>
 "imap <C-Down> <Esc><C-D>
+
+" Fold - unfold all indentations 
+let g:fs_fold_toggle = 0
+function! ToggleFoldAll()
+    if g:fs_fold_toggle == 0
+        execute 'set foldmethod=indent'
+        execute 'set foldlevel=0'
+        let g:fs_fold_toggle = 1
+    else
+        execute 'set foldmethod=indent'
+        execute 'set foldlevel=99'
+        let g:fs_fold_toggle = 0
+    endif
+    execute 'normal! zz'
+endfunction
+nnoremap fs :call ToggleFoldAll()<CR>
+
+" Set mark with capital M
+nnoremap M :call SetGlobalMark()<CR>
+
+" Jump to mark with lowercase m
+nnoremap m :call JumpToGlobalMark()<CR>
+
+" Set global mark function
+function! SetGlobalMark()
+  let l:char = nr2char(getchar())
+  if l:char =~# '[a-z]'
+    execute 'normal! m' . l:char
+    let g:global_marks[l:char] = [bufnr(), getpos("'".l:char)]
+  else
+    echo 'Only lowercase marks are allowed for global marks'
+  endif
+endfunction
+
+" Jump to global mark function
+function! JumpToGlobalMark()
+  let l:char = nr2char(getchar())
+  if l:char =~# '[a-z]' && has_key(g:global_marks, l:char)
+    
+    let l:mark = g:global_marks[l:char]
+    execute 'buffer ' . l:mark[0]
+    call setpos(".", l:mark[1])
+
+  else
+    echo 'Invalid mark'
+  endif
+endfunction
+
+" Initialize global marks dictionary
+if !exists('g:global_marks')
+  let g:global_marks = {}
+endif
 
 "java autocompletion
 " autocmd FileType java setlocal omnifunc=javacomplete#Complete
@@ -218,6 +284,18 @@ Plug 'github/copilot.vim'
 
 " Comment plugin
 Plug 'numToStr/Comment.nvim'
+
+" Multiple cursors
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+" TODO comments
+Plug 'folke/todo-comments.nvim'
+
+" Persistent sessions
+Plug 'folke/persistence.nvim'
+
+" Bufferline
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
