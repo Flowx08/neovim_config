@@ -164,7 +164,13 @@ map gl :tabn<cr>
 map gh :tabp<cr>
 map gk :tabe<cr>
 map gq :tabc<cr>
+map vv :vsplit<cr>
+map vl :wincmd l<CR>
+map vh :wincmd h<CR>
+map vk :wincmd k<CR>
+map vj :wincmd j<CR>
 map <C-e> :lua vim.diagnostic.open_float()<cr>
+map ; :Oil<cr>
 " map xl :bn<CR>
 " map xh :bp<CR>
 
@@ -262,11 +268,13 @@ Plug 'rafamadriz/friendly-snippets'
 " Autocompletion plugin
 " ========================
 Plug 'neovim/nvim-lspconfig'
+Plug 'simrat39/rust-tools.nvim' " rust tools
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 
 " For vsnip users.
 Plug 'hrsh7th/cmp-vsnip'
@@ -296,6 +304,15 @@ Plug 'folke/persistence.nvim'
 
 " Bufferline
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+
+" navigation in buffer
+Plug 'stevearc/oil.nvim'
+
+" Autopair parentheses and brackets
+Plug 'windwp/nvim-autopairs'
+
+" Show indentation level
+Plug 'echasnovski/mini.indentscope'
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'

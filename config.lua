@@ -112,6 +112,7 @@ cmp.setup({
 		{ name = 'luasnip' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
+    { name = 'nvim_lsp_signature_help' } -- For signature help
 	}, {
 		{ name = 'buffer' },
 	})
@@ -203,3 +204,24 @@ require("persistence").setup()
 -- Setup bufferline
 require("bufferline").setup()
 
+-- Setup oil (navigation in buffer)
+require("oil").setup()
+
+-- Setup nvim-autopairs (auto completion of brackets)
+require("nvim-autopairs").setup()
+
+-- Setup mini.indentscope (show indents)
+require('mini.indentscope').setup()
+
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
