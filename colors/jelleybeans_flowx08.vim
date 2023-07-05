@@ -45,7 +45,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "jellybeans"
+let colors_name = "jelleybeans_flowx08"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
   let s:low_color = 0
@@ -423,3 +423,39 @@ delf s:grey_color
 delf s:grey_level
 delf s:grey_number
 " }}}
+
+
+" Custom changes
+
+"Change color of current number
+hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
+
+"Dont highlight vertical line between buffers
+hi vertsplit guifg=fg guibg=bg
+
+"Set background transparent
+highlight LineNr ctermbg=NONE guibg=NONE guifg=#444444
+hi! Normal ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+
+"Hide black lines ~ 
+hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
+
+"Tab background
+hi TabLineFill term=bold cterm=bold ctermbg=black
+hi TabLine ctermfg=white ctermbg=black
+hi TabLineSel ctermfg=white ctermbg=black
+hi Title ctermfg=white ctermbg=black
+hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
+hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
+
+" Folding bacground color
+hi Folded guibg=#111111 ctermbg=black ctermfg=white guifg=#aaaaaa
+
+" hide status bar
+" hi StatusLine ctermbg=NONE
+highlight StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
+
+" Change color of sugn column (for syntax checks)
+hi SignColumn guibg=black
+

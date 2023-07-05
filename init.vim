@@ -3,10 +3,10 @@ set ruler
 
 set number
 "set nonumber
-set autoindent
-set tabstop=2
-"set softtabstop=4
-set shiftwidth=2
+set autoindent 
+set tabstop=2 
+"set softtabstop=4 
+set shiftwidth=2 
 set smarttab
 set expandtab
 "set noexpandtab
@@ -67,44 +67,48 @@ set showmatch
 "Format syntax
 syntax on
 
+function! s:costumize_colors()
+
+  "Change color of current number
+  hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
+
+  "Dont highlight vertical line between buffers
+  hi vertsplit guifg=fg guibg=bg
+
+  "Set background transparent
+  highlight LineNr ctermbg=NONE guibg=NONE guifg=#444444
+  hi! Normal ctermbg=NONE guibg=NONE
+  hi! NonText ctermbg=NONE guibg=NONE
+
+  "Hide black lines ~ 
+  hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
+
+  "Tab background
+  hi TabLineFill term=bold cterm=bold ctermbg=black
+  hi TabLine ctermfg=white ctermbg=black
+  hi TabLineSel ctermfg=white ctermbg=black
+  hi Title ctermfg=white ctermbg=black
+  hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
+  hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
+
+  " Folding bacground color
+  hi Folded guibg=#111111 ctermbg=black ctermfg=white guifg=#aaaaaa
+
+  " hide status bar
+  " hi StatusLine ctermbg=NONE
+  highlight StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
+
+  " Change color of sugn column (for syntax checks)
+  hi SignColumn guibg=black
+endfunction
+autocmd! ColorScheme jelleybeans_flowx08 call s:costumize_colors()
+
 "Color scheme
 "colorscheme badwolf
 "colorscheme mopkai
 "colorscheme jelleybeans
 colorscheme jelleybeans_flowx08
 "colorscheme luna-term
-
-"Change color of current number
-hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
-
-"Dont highlight vertical line between buffers
-hi vertsplit guifg=fg guibg=bg
-
-"Set background transparent
-highlight LineNr ctermbg=NONE guibg=NONE guifg=#444444
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
-
-"Hide black lines ~ 
-hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
-
-"Tab background
-hi TabLineFill term=bold cterm=bold ctermbg=black
-hi TabLine ctermfg=white ctermbg=black
-hi TabLineSel ctermfg=white ctermbg=black
-hi Title ctermfg=white ctermbg=black
-hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
-hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
-
-" Folding bacground color
-hi Folded guibg=#111111 ctermbg=black ctermfg=white guifg=#aaaaaa
-
-" hide status bar
-" hi StatusLine ctermbg=NONE
-highlight StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
-
-" Change color of sugn column (for syntax checks)
-hi SignColumn guibg=black
 
 "clang_complete
 let g:clang_library_path="/usr/lib/llvm-3.8/lib/libclang.so.1"
@@ -137,7 +141,7 @@ let g:livepreview_previewer = 'evince'
 set pumheight=20
 
 " disable s key
-map s <Nop>
+" map s <Nop>
 
 nmap <C-s> :w<cr>
 nmap <C-m> :make<cr>
@@ -146,7 +150,7 @@ nmap <C-b> :NvimTreeToggle<cr>
 nmap <C-g> :YcmCompleter GoToDefinition<cr>
 
 " Find files using Telescope command-line sugar.
-map ff :Telescope find_files theme=dropdown<cr>
+map ff :Telescope find_files theme=ivy<cr>
 " map fs :Telescope lsp_document_symbols theme=ivy<cr>
 map fr :Telescope lsp_references theme=ivy<cr>
 map fe :Telescope diagnostics theme=ivy<cr>
@@ -165,24 +169,29 @@ map gh :tabp<cr>
 map gk :tabe<cr>
 map gq :tabc<cr>
 map vv :vsplit<cr>
-map vl :wincmd l<CR>
-map vh :wincmd h<CR>
-map vk :wincmd k<CR>
-map vj :wincmd j<CR>
 map <C-e> :lua vim.diagnostic.open_float()<cr>
 map ; :Oil<cr>
 " map xl :bn<CR>
 " map xh :bp<CR>
 
+" Delete without yanking
+nnoremap d "_d
+vnoremap d "_d
+
 "Move between pannels with arrow keys 
-nmap <C-Up> :wincmd k<CR>
-nmap <C-Down> :wincmd j<CR>
-nmap <C-Left> :wincmd h<CR>
-nmap <C-Right> :wincmd l<CR>
+nmap <C-w-Up> :wincmd k<CR>
+nmap <C-w-Down> :wincmd j<CR>
+nmap <C-w-Left> :wincmd h<CR>
+nmap <C-w-Right> :wincmd l<CR>
 "nmap <C-Up> <Esc><C-U>
 "nmap <C-Down> <Esc><C-D>
 "imap <C-Up> <Esc><C-U>
 "imap <C-Down> <Esc><C-D>
+
+" Multiple cursors custom bindings
+let g:VM_maps = {}
+let g:VM_maps["Select Cursor Down"] = '<C-j>'      " start selecting down
+let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 
 " Fold - unfold all indentations 
 let g:fs_fold_toggle = 0
@@ -223,8 +232,7 @@ function! JumpToGlobalMark()
   if l:char =~# '[a-z]' && has_key(g:global_marks, l:char)
     
     let l:mark = g:global_marks[l:char]
-    execute 'buffer ' . l:mark[0]
-    call setpos(".", l:mark[1])
+    xecute 'buffer ' . l:mark[0] call setpos(".", l:mark[1])
 
   else
     echo 'Invalid mark'
@@ -276,6 +284,8 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 
+Plug 'ggandor/leap.nvim'
+
 " For vsnip users.
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
@@ -313,6 +323,15 @@ Plug 'windwp/nvim-autopairs'
 
 " Show indentation level
 Plug 'echasnovski/mini.indentscope'
+
+" Move to word 
+Plug 'ggandor/leap.nvim'
+
+" Log LSP messages
+Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
+
+" hydra
+Plug 'anuvyklack/hydra.nvim'
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
