@@ -3,10 +3,10 @@ set ruler
 
 set number
 "set nonumber
-set autoindent 
-set tabstop=2 
-"set softtabstop=4 
-set shiftwidth=2 
+set autoindent
+set tabstop=2
+"set softtabstop=4
+set shiftwidth=2
 set smarttab
 set expandtab
 "set noexpandtab
@@ -26,7 +26,10 @@ set wrap "Wrap lines
 set noshowmode
 set noruler
 set laststatus=0
- set noshowcmd
+set noshowcmd
+
+" Show file name and modification on window bar
+set winbar=%m\ %f
 
 " turn hybrid line numbers on
 " set number relativenumber
@@ -51,11 +54,11 @@ set clipboard+=unnamed
 
 set nowrap "don't wrap lines
 
-set history=1000	"remember more commands and search history	
+set history=1000	"remember more commands and search history
 set undolevels=1000	"use many much levels of undo
 
 "Don't write a backup file
-set nobackup		
+set nobackup
 set noswapfile
 
 "Higlight matching parenthesis
@@ -80,7 +83,7 @@ function! s:costumize_colors()
   hi! Normal ctermbg=NONE guibg=NONE
   hi! NonText ctermbg=NONE guibg=NONE
 
-  "Hide black lines ~ 
+  "Hide black lines ~
   hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
 
   "Tab background
@@ -120,7 +123,7 @@ let g:clang_snippets_engine='clang_complete'
 
 " press <Tab> to expand or jump in a snippet. These can also be mapped separately
 " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
 " -1 for jumping backwards.
 inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
 
@@ -138,7 +141,8 @@ let g:go_bin_path = expand("/usr/local/go")
 let g:livepreview_previewer = 'evince'
 
 " Limit popup menu height
-set pumheight=20
+set pumheight=30
+set pumwidth=30
 
 " disable s key
 " map s <Nop>
@@ -147,15 +151,15 @@ nmap <C-s> :w<cr>
 nmap <C-m> :make<cr>
 nmap <C-r> :%s/r1/r2/g
 nmap <C-b> :NvimTreeToggle<cr>
-nmap <C-g> :YcmCompleter GoToDefinition<cr>
 
 " Find files using Telescope command-line sugar.
 map ff :Telescope find_files theme=ivy<cr>
 " map fs :Telescope lsp_document_symbols theme=ivy<cr>
 map fr :Telescope lsp_references theme=ivy<cr>
 map fe :Telescope diagnostics theme=ivy<cr>
+map fb :Telescope buffers theme=ivy<cr>
 map ft :TodoTelescope<cr>
-map fl :bn<CR> 
+map fl :bn<CR>
 map fh :bp<CR>
 map fd :ClangdSwitchSourceHeader<CR>
 map fq :bd<CR>
@@ -178,7 +182,7 @@ map ; :Oil<cr>
 nnoremap d "_d
 vnoremap d "_d
 
-"Move between pannels with arrow keys 
+"Move between pannels with arrow keys
 nmap <C-w-Up> :wincmd k<CR>
 nmap <C-w-Down> :wincmd j<CR>
 nmap <C-w-Left> :wincmd h<CR>
@@ -193,7 +197,7 @@ let g:VM_maps = {}
 let g:VM_maps["Select Cursor Down"] = '<C-j>'      " start selecting down
 let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 
-" Fold - unfold all indentations 
+" Fold - unfold all indentations
 let g:fs_fold_toggle = 0
 function! ToggleFoldAll()
     if g:fs_fold_toggle == 0
@@ -230,7 +234,7 @@ endfunction
 function! JumpToGlobalMark()
   let l:char = nr2char(getchar())
   if l:char =~# '[a-z]' && has_key(g:global_marks, l:char)
-    
+
     let l:mark = g:global_marks[l:char]
     xecute 'buffer ' . l:mark[0] call setpos(".", l:mark[1])
 
@@ -313,7 +317,7 @@ Plug 'folke/todo-comments.nvim'
 Plug 'folke/persistence.nvim'
 
 " Bufferline
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 " navigation in buffer
 Plug 'stevearc/oil.nvim'
@@ -324,7 +328,7 @@ Plug 'windwp/nvim-autopairs'
 " Show indentation level
 Plug 'echasnovski/mini.indentscope'
 
-" Move to word 
+" Move to word
 Plug 'ggandor/leap.nvim'
 
 " Log LSP messages
@@ -332,6 +336,9 @@ Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
 
 " hydra
 Plug 'anuvyklack/hydra.nvim'
+
+" Automatic formatting
+Plug 'sbdchd/neoformat'
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
@@ -347,5 +354,23 @@ call plug#end()
 
 " For autocompletion plugin
 set completeopt=menu,menuone,noselect
+
+" Setup formatiing for C and C++
+" let g:neoformat_c_clangformat = {
+"       \ 'exe': 'clang-format',
+"       \ 'args': ['-style=file'],
+"       \ }
+" let g:neoformat_cpp_clangformat = {
+"       \ 'exe': 'clang-format',
+"       \ 'args': ['-style=file'],
+"       \ }
+" let g:neoformat_enabled_cpp = ['clangformat']
+" let g:neoformat_enabled_c = ['clangformat']
+
+"Automatically format files on save
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 luafile /Users/carlo/.config/nvim/config.lua
