@@ -29,7 +29,7 @@ set laststatus=0
 set noshowcmd
 
 " Show file name and modification on window bar
-set winbar=%m\ %f
+" set winbar=%m\ %f
 
 " turn hybrid line numbers on
 " set number relativenumber
@@ -40,10 +40,6 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-"noremap h <NOP>
-"noremap j <NOP>
-"noremap k <NOP>
-"noremap l <NOP>
 
 "autoresize pannels on resize event
 autocmd VimResized * exe "normal \<c-w>="
@@ -142,13 +138,9 @@ let g:livepreview_previewer = 'evince'
 
 " Limit popup menu height
 set pumheight=30
-set pumwidth=30
-
-" disable s key
-" map s <Nop>
+set pumwidth=60
 
 nmap <C-s> :w<cr>
-nmap <C-m> :make<cr>
 nmap <C-r> :%s/r1/r2/g
 nmap <C-b> :NvimTreeToggle<cr>
 
@@ -165,7 +157,6 @@ map fd :ClangdSwitchSourceHeader<CR>
 map fq :bd<CR>
 map <tt> :ToggleTerm<cr>
 map sl :HopWordCurrentLine<cr>
-map ss :HopWord<cr>
 map sk <C-u>
 map sj <C-d>
 map gl :tabn<cr>
@@ -175,8 +166,13 @@ map gq :tabc<cr>
 map vv :vsplit<cr>
 map <C-e> :lua vim.diagnostic.open_float()<cr>
 map ; :Oil<cr>
+map ss :lua vim.lsp.buf.hover()<cr>
+map sd :lua vim.lsp.buf.definition()<cr>
 " map xl :bn<CR>
 " map xh :bp<CR>
+
+" Center horizontally
+map zh zszH
 
 " Delete without yanking
 nnoremap d "_d
@@ -187,10 +183,46 @@ nmap <C-w-Up> :wincmd k<CR>
 nmap <C-w-Down> :wincmd j<CR>
 nmap <C-w-Left> :wincmd h<CR>
 nmap <C-w-Right> :wincmd l<CR>
-"nmap <C-Up> <Esc><C-U>
-"nmap <C-Down> <Esc><C-D>
-"imap <C-Up> <Esc><C-U>
-"imap <C-Down> <Esc><C-D>
+
+" Resize split when changing split focus
+" function! ResizeWindows()
+"
+"   " Calculate the remaining width
+"   let remaining_width = &columns - 85
+"
+"   " Get the number of other windows
+"   let window_count = winnr('$') - 1
+"   
+"   " Get current window id
+"   let current_window = winnr()
+"
+"   " Resize other windows if there are any
+"   if window_count > 0
+"     " Calculate the width for each of the other windows
+"     let window_width = float2nr(remaining_width / window_count)
+"     
+"     " Resize each of the other windows
+"     for win_id in range(1, winnr('$'))
+"       if win_id != winnr()
+"         execute win_id . 'wincmd w'
+"         execute 'vertical resize ' . window_width
+"         sleep 10m
+"       endif
+"     endfor
+"     
+"     execute current_window . 'wincmd w'
+"     execute 'vertical resize ' . 85
+"
+"     " Return focus to the original window
+"     execute current_window . 'wincmd w'
+"   endif
+" endfunction
+"
+" nnoremap <C-W>h :wincmd h<CR>:call ResizeWindows()<CR>
+" nnoremap <C-W>l :wincmd l<CR>:call ResizeWindows()<CR>
+" nnoremap <C-W><C-h> :wincmd h<CR>:call ResizeWindows()<CR>
+" nnoremap <C-W><C-l> :wincmd l<CR>:call ResizeWindows()<CR>
+
 
 " Multiple cursors custom bindings
 let g:VM_maps = {}
@@ -272,7 +304,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-Plug 'phaazon/hop.nvim'
+" Plug 'phaazon/hop.nvim'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'rafamadriz/friendly-snippets'
@@ -286,9 +318,8 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-
-Plug 'ggandor/leap.nvim'
+" Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'ray-x/lsp_signature.nvim'
 
 " For vsnip users.
 Plug 'hrsh7th/cmp-vsnip'
@@ -317,7 +348,7 @@ Plug 'folke/todo-comments.nvim'
 Plug 'folke/persistence.nvim'
 
 " Bufferline
-" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 " navigation in buffer
 Plug 'stevearc/oil.nvim'
@@ -328,9 +359,6 @@ Plug 'windwp/nvim-autopairs'
 " Show indentation level
 Plug 'echasnovski/mini.indentscope'
 
-" Move to word
-Plug 'ggandor/leap.nvim'
-
 " Log LSP messages
 Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
 
@@ -339,6 +367,16 @@ Plug 'anuvyklack/hydra.nvim'
 
 " Automatic formatting
 Plug 'sbdchd/neoformat'
+
+" Move to word
+Plug 'ggandor/leap.nvim'
+
+
+" Debugger
+" Plug 'mfussenegger/nvim-dap'
+
+" Centering splits 
+Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
