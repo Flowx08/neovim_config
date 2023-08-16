@@ -348,7 +348,7 @@ Plug 'folke/todo-comments.nvim'
 Plug 'folke/persistence.nvim'
 
 " Bufferline
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 " navigation in buffer
 Plug 'stevearc/oil.nvim'
@@ -370,6 +370,9 @@ Plug 'sbdchd/neoformat'
 
 " Move to word
 Plug 'ggandor/leap.nvim'
+
+" Status line
+Plug 'nvim-lualine/lualine.nvim'
 
 
 " Debugger
