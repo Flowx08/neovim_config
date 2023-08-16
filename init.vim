@@ -109,32 +109,27 @@ autocmd! ColorScheme jelleybeans_flowx08 call s:costumize_colors()
 colorscheme jelleybeans_flowx08
 "colorscheme luna-term
 
-"clang_complete
-let g:clang_library_path="/usr/lib/llvm-3.8/lib/libclang.so.1"
-set conceallevel=0
-set concealcursor=vin
-let g:clang_snippets=1
-let g:clang_conceal_snippets=1
-let g:clang_snippets_engine='clang_complete'
+" Set the vertical split character to  a space (there is a single space after '\ ')
+set fillchars+=vert:\ 
 
-" press <Tab> to expand or jump in a snippet. These can also be mapped separately
-" via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
-" -1 for jumping backwards.
-inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+" " press <Tab> to expand or jump in a snippet. These can also be mapped separately
+" " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+" imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+" " -1 for jumping backwards.
+" inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+"
+" snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+" snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+"
+" " For changing choices in choiceNodes (not strictly necessary for a basic setup).
+" imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+" smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 
-snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
-snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
-
-" For changing choices in choiceNodes (not strictly necessary for a basic setup).
-imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-
-" go lang bin path
-let g:go_bin_path = expand("/usr/local/go")
-
-"livepreview prewviewer
-let g:livepreview_previewer = 'evince'
+" " go lang bin path
+" let g:go_bin_path = expand("/usr/local/go")
+"
+" "livepreview prewviewer
+" let g:livepreview_previewer = 'evince'
 
 " Limit popup menu height
 set pumheight=30
@@ -170,7 +165,6 @@ map ss :lua vim.lsp.buf.hover()<cr>
 map sd :lua vim.lsp.buf.definition()<cr>
 " map xl :bn<CR>
 " map xh :bp<CR>
-
 " Center horizontally
 map zh zszH
 
@@ -183,46 +177,6 @@ nmap <C-w-Up> :wincmd k<CR>
 nmap <C-w-Down> :wincmd j<CR>
 nmap <C-w-Left> :wincmd h<CR>
 nmap <C-w-Right> :wincmd l<CR>
-
-" Resize split when changing split focus
-" function! ResizeWindows()
-"
-"   " Calculate the remaining width
-"   let remaining_width = &columns - 85
-"
-"   " Get the number of other windows
-"   let window_count = winnr('$') - 1
-"   
-"   " Get current window id
-"   let current_window = winnr()
-"
-"   " Resize other windows if there are any
-"   if window_count > 0
-"     " Calculate the width for each of the other windows
-"     let window_width = float2nr(remaining_width / window_count)
-"     
-"     " Resize each of the other windows
-"     for win_id in range(1, winnr('$'))
-"       if win_id != winnr()
-"         execute win_id . 'wincmd w'
-"         execute 'vertical resize ' . window_width
-"         sleep 10m
-"       endif
-"     endfor
-"     
-"     execute current_window . 'wincmd w'
-"     execute 'vertical resize ' . 85
-"
-"     " Return focus to the original window
-"     execute current_window . 'wincmd w'
-"   endif
-" endfunction
-"
-" nnoremap <C-W>h :wincmd h<CR>:call ResizeWindows()<CR>
-" nnoremap <C-W>l :wincmd l<CR>:call ResizeWindows()<CR>
-" nnoremap <C-W><C-h> :wincmd h<CR>:call ResizeWindows()<CR>
-" nnoremap <C-W><C-l> :wincmd l<CR>:call ResizeWindows()<CR>
-
 
 " Multiple cursors custom bindings
 let g:VM_maps = {}
@@ -279,12 +233,6 @@ endfunction
 if !exists('g:global_marks')
   let g:global_marks = {}
 endif
-
-"java autocompletion
-" autocmd FileType java setlocal omnifunc=javacomplete#Complete
-"
-" Set the vertical split character to  a space (there is a single space after '\ ')
-set fillchars+=vert:\ 
 
 call plug#begin()
 " The default plugin directory will be as follows:
@@ -374,7 +322,6 @@ Plug 'ggandor/leap.nvim'
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 
-
 " Debugger
 " Plug 'mfussenegger/nvim-dap'
 
@@ -409,9 +356,6 @@ set completeopt=menu,menuone,noselect
 " let g:neoformat_enabled_c = ['clangformat']
 
 "Automatically format files on save
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+autocmd BufWritePre * Neoformat
 
 luafile /Users/carlo/.config/nvim/config.lua

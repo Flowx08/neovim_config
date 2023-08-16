@@ -419,7 +419,7 @@ lualine_theme.theme = function()
   local colors = {
     darkgray = "#000000",
     gray = "#ffffff",
-    innerbg = "#1a1a1a",
+    innerbg = nil,
     outerbg = "#555599",
     normal = "#7e9cd8",
     insert = "#7ed87e",
@@ -435,27 +435,27 @@ lualine_theme.theme = function()
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     visual = {
-      a = { fg = colors.darkgray, bg = colors.visual, gui = "bold" },
+      a = { fg = colors.gray, bg = colors.visual, gui = "bold" },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     replace = {
-      a = { fg = colors.darkgray, bg = colors.replace, gui = "bold" },
+      a = { fg = colors.gray, bg = colors.replace, gui = "bold" },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     normal = {
-      a = { fg = colors.darkgray, bg = colors.normal, gui = "bold" },
+      a = { fg = colors.gray, bg = colors.normal, gui = "bold" },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     insert = {
-      a = { fg = colors.darkgray, bg = colors.insert, gui = "bold" },
+      a = { fg = colors.gray, bg = colors.insert, gui = "bold" },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
     command = {
-      a = { fg = colors.darkgray, bg = colors.command, gui = "bold" },
+      a = { fg = colors.gray, bg = colors.command, gui = "bold" },
       b = { fg = colors.gray, bg = colors.outerbg },
       c = { fg = colors.gray, bg = colors.innerbg },
     },
@@ -466,7 +466,7 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = lualine_theme.theme(),
-    component_separators = { left = ' ', right = ' '},
+   component_separators = { left = ' ', right = ' '},
     section_separators = { left = ' ', right = ' '},
     disabled_filetypes = {
       statusline = {},
@@ -494,8 +494,8 @@ require('lualine').setup {
       unnamed = '', -- Text to show for unnamed buffers.
       newfile = '[New]',     -- Text to show for newly created file before first write
     }}},
-    lualine_c = {'diagnostics'},
-    lualine_x = {'branch', 'diff'},
+    lualine_c = {},
+    lualine_x = {'diagnostics','diff'},
     lualine_y = {},
     lualine_z = {}
   },
@@ -508,8 +508,8 @@ require('lualine').setup {
       readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
       unnamed = '', -- Text to show for unnamed buffers.
       newfile = '[New]',     -- Text to show for newly created file before first write
-    }}, 'diagnostics'},
-    lualine_x = {'branch', 'diff'},
+    }}},
+    lualine_x = {'diagnostics', 'diff'},
     lualine_y = {},
     lualine_z = {}
   },
