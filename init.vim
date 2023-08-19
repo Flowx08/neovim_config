@@ -145,6 +145,7 @@ map ff :Telescope find_files theme=ivy<cr>
 map fr :Telescope lsp_references theme=ivy<cr>
 map fe :Telescope diagnostics theme=ivy<cr>
 map fb :Telescope buffers theme=ivy<cr>
+map fs :lua require("telescope.builtin").lsp_document_symbols({ symbols = { "class", "variable", "function", "enum" } })<cr>
 map ft :TodoTelescope<cr>
 map fl :bn<CR>
 map fh :bp<CR>
@@ -183,26 +184,26 @@ let g:VM_maps = {}
 let g:VM_maps["Select Cursor Down"] = '<C-j>'      " start selecting down
 let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 
-" Fold - unfold all indentations
-let g:fs_fold_toggle = 0
-function! ToggleFoldAll()
-    if g:fs_fold_toggle == 0
-        execute 'set foldmethod=indent'
-        execute 'set foldlevel=0'
-        let g:fs_fold_toggle = 1
-    else
-        execute 'set foldmethod=indent'
-        execute 'set foldlevel=99'
-        let g:fs_fold_toggle = 0
-    endif
-    execute 'normal! zz'
-endfunction
-nnoremap fs :call ToggleFoldAll()<CR>
-
-" Set mark with capital M
-nnoremap M :call SetGlobalMark()<CR>
-
-" Jump to mark with lowercase m
+" " Fold - unfold all indentations
+" let g:fs_fold_toggle = 0
+" function! ToggleFoldAll()
+"     if g:fs_fold_toggle == 0
+"         execute 'set foldmethod=indent'
+"         execute 'set foldlevel=0'
+"         let g:fs_fold_toggle = 1
+"     else
+"         execute 'set foldmethod=indent'
+"         execute 'set foldlevel=99'
+"         let g:fs_fold_toggle = 0
+"     endif
+"     execute 'normal! zz'
+" endfunction
+" nnoremap fs :call ToggleFoldAll()<CR>
+"
+" " Set mark with capital M
+" nnoremap M :call SetGlobalMark()<CR>
+"
+" " Jump to mark with lowercase m
 nnoremap m :call JumpToGlobalMark()<CR>
 
 " Set global mark function
@@ -327,6 +328,9 @@ Plug 'nvim-lualine/lualine.nvim'
 
 " Centering splits 
 Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
+
+" Harpoon - quick file navigation
+Plug 'ThePrimeagen/harpoon'
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'

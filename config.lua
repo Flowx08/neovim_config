@@ -418,9 +418,10 @@ local lualine_theme = {}
 lualine_theme.theme = function()
   local colors = {
     darkgray = "#000000",
-    gray = "#ffffff",
+    active_color = "#9999ff",
+    white = "#dddddd",
     innerbg = nil,
-    outerbg = "#555599",
+    outerbg = nil,
     normal = "#7e9cd8",
     insert = "#7ed87e",
     visual = "#ffa066",
@@ -430,44 +431,48 @@ lualine_theme.theme = function()
   }
   return {
     inactive = {
-      a = { fg = colors.gray, bg = colors.outerbg, gui = "bold" },
-      b = { fg = colors.gray, bg = colors.outerbg },
-      c = { fg = colors.gray, bg = colors.innerbg },
+      a = { fg = colors.white, bg = colors.outerbg, gui = "bold" },
+      b = { fg = colors.white, bg = colors.outerbg },
+      c = { fg = colors.white, bg = colors.innerbg },
     },
     visual = {
-      a = { fg = colors.gray, bg = colors.visual, gui = "bold" },
-      b = { fg = colors.gray, bg = colors.outerbg },
-      c = { fg = colors.gray, bg = colors.innerbg },
+      a = { fg = colors.active_color, bg = colors.visual, gui = "bold" },
+      b = { fg = colors.active_color, bg = colors.outerbg },
+      c = { fg = colors.active_color, bg = colors.innerbg },
     },
     replace = {
-      a = { fg = colors.gray, bg = colors.replace, gui = "bold" },
-      b = { fg = colors.gray, bg = colors.outerbg },
-      c = { fg = colors.gray, bg = colors.innerbg },
+      a = { fg = colors.active_color, bg = colors.replace, gui = "bold" },
+      b = { fg = colors.active_color, bg = colors.outerbg },
+      c = { fg = colors.active_color, bg = colors.innerbg },
     },
     normal = {
-      a = { fg = colors.gray, bg = colors.normal, gui = "bold" },
-      b = { fg = colors.gray, bg = colors.outerbg },
-      c = { fg = colors.gray, bg = colors.innerbg },
+      a = { fg = colors.active_color, bg = colors.normal, gui = "bold" },
+      b = { fg = colors.active_color, bg = colors.outerbg },
+      c = { fg = colors.active_color, bg = colors.innerbg },
     },
     insert = {
-      a = { fg = colors.gray, bg = colors.insert, gui = "bold" },
-      b = { fg = colors.gray, bg = colors.outerbg },
-      c = { fg = colors.gray, bg = colors.innerbg },
+      a = { fg = colors.active_color, bg = colors.insert, gui = "bold" },
+      b = { fg = colors.active_color, bg = colors.outerbg },
+      c = { fg = colors.active_color, bg = colors.innerbg },
     },
     command = {
-      a = { fg = colors.gray, bg = colors.command, gui = "bold" },
-      b = { fg = colors.gray, bg = colors.outerbg },
-      c = { fg = colors.gray, bg = colors.innerbg },
+      a = { fg = colors.active_color, bg = colors.command, gui = "bold" },
+      b = { fg = colors.active_color, bg = colors.outerbg },
+      c = { fg = colors.active_color, bg = colors.innerbg },
     },
   }
+end
+
+local function lualine_selected()
+  return [[ ➤]]
 end
 
 require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = lualine_theme.theme(),
-   component_separators = { left = ' ', right = ' '},
-    section_separators = { left = ' ', right = ' '},
+    component_separators = { left = '', right = ' '},
+    section_separators = { left = '', right = ' '},
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -487,7 +492,7 @@ require('lualine').setup {
 
   winbar = {
     lualine_a = {},
-    lualine_b = {{'filename',
+    lualine_b = {lualine_selected, {'filename', path=4,
     symbols = {
       modified = '[+]',      -- Text to show when the file is modified.
       readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
@@ -502,7 +507,7 @@ require('lualine').setup {
   inactive_winbar = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {{'filename',
+    lualine_c = {{'filename', path=4,
     symbols = {
       modified = '[+]',      -- Text to show when the file is modified.
       readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
@@ -516,3 +521,18 @@ require('lualine').setup {
   tabline = {},
   extensions = {}
 }
+
+-- Harpoon setup
+-- mark file with Shift + M
+vim.api.nvim_set_keymap("n", "<S-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
+
+-- Navigate to file number X with m + X
+vim.api.nvim_set_keymap("n", "m1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "m2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "m3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "m4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "m5", "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "m6", "<cmd>lua require('harpoon.ui').nav_file(6)<CR>", { noremap = true, silent = true })
+
+-- Toggle quich menu with Ctrl + m
+vim.api.nvim_set_keymap("n", "<C-m>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
