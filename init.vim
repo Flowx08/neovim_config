@@ -151,6 +151,7 @@ map fl :bn<CR>
 map fh :bp<CR>
 map fd :ClangdSwitchSourceHeader<CR>
 map fq :bd<CR>
+map fc :Telescope colorscheme theme=ivy<cr>
 map <tt> :ToggleTerm<cr>
 map sl :HopWordCurrentLine<cr>
 map sk <C-u>
@@ -331,6 +332,11 @@ Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
 
 " Harpoon - quick file navigation
 Plug 'ThePrimeagen/harpoon'
+
+" Color schemes
+Plug 'folke/tokyonight.nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'nyoom-engineering/oxocarbon.nvim'
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
