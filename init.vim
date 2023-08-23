@@ -9,9 +9,7 @@ set tabstop=2
 set shiftwidth=2
 set smarttab
 set expandtab
-"set noexpandtab
-set backspace=2
-"set colorcolumn=100
+"set noexpandtab set backspace=2 set colorcolumn=100
 set mouse=a
 set hlsearch
 set cursorline "highlight current line
@@ -337,6 +335,10 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'folke/tokyonight.nvim'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'nyoom-engineering/oxocarbon.nvim'
+
+" Git stuff
+Plug 'NeogitOrg/neogit'
+Plug 'lewis6991/gitsigns.nvim'
 
 " For ultisnips users.
 "Plug 'SirVer/ultisnips'
