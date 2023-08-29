@@ -688,7 +688,7 @@ Hydra({
          type = "cmdline",
       },
     },
-   body = '<C-d>',
+   body = '<S-d>',
    heads = {
       {'ol', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open lldb' }},
       {'og', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open gdb' }},
