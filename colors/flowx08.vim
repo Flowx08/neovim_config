@@ -1,42 +1,3 @@
-" Vim color file
-"
-"  "    __       _ _       _                             "
-"  "    \ \  ___| | |_   _| |__   ___  __ _ _ __  ___    "
-"  "     \ \/ _ \ | | | | |  _ \ / _ \/ _  |  _ \/ __|   "
-"  "  /\_/ /  __/ | | |_| | |_| |  __/ |_| | | | \__ \   "
-"  "  \___/ \___|_|_|\__  |____/ \___|\____|_| |_|___/   "
-"  "                 \___/                               "
-"
-"         "A colorful, dark color scheme for Vim."
-"
-" File:         jellybeans.vim
-" Maintainer:   NanoTech <http://nanotech.nanotechcorp.net/>
-" Version:      1.3
-" Last Change:  October 25th, 2010
-" Contributors: Daniel Herbert <http://pocket-ninja.com>,
-"               Henry So, Jr. <henryso@panix.com>,
-"               David Liang <bmdavll at gmail dot com>
-"
-" Copyright (c) 2009-2010 NanoTech
-"
-" Permission is hereby granted, free of charge, to any person obtaining a copy
-" of this software and associated documentation files (the "Software"), to deal
-" in the Software without restriction, including without limitation the rights
-" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-" copies of the Software, and to permit persons to whom the Software is
-" furnished to do so, subject to the following conditions:
-"
-" The above copyright notice and this permission notice shall be included in
-" all copies or substantial portions of the Software.
-"
-" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-" THE SOFTWARE.
-
 set background=dark
 
 hi clear
@@ -45,7 +6,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "jelleybeans_flowx08"
+let colors_name = "flowx08"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
   let s:low_color = 0
@@ -459,3 +420,15 @@ highlight StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
 " Change color of sugn column (for syntax checks)
 hi SignColumn guibg=black
 
+highlight CmpItemAbbrDeprecated guifg=#ff0000
+highlight CmpItemAbbrMatch guifg=#f0a0c0
+highlight CmpItemAbbrMatchFuzzy guifg=#f0a0c0
+highlight CmpItemKindVariable guifg=#ffb964
+highlight CmpItemKindInterface guifg=#8fbfdc
+highlight CmpItemKindStruct guifg=#8fbfdc
+highlight CmpItemKindText guifg=#ffffff
+highlight CmpItemKindFunction guifg=#fad07a
+highlight CmpItemKindMethod guifg=#fad07a
+highlight CmpItemKindKeyword guifg=#8197bf
+highlight CmpItemKindProperty guifg=#ff0000
+highlight CmpItemKindUnit guifg=#ff0000

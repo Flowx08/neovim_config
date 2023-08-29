@@ -20,7 +20,6 @@ vim.diagnostic.config({
   float = { border = "single" },
 })
 
-
 -- empty setup using defaults
 require("nvim-tree").setup()
 
@@ -260,7 +259,10 @@ require("persistence").setup()
 require("nvim-autopairs").setup()
 
 -- Setup mini.indentscope (show indents)
-require('mini.indentscope').setup()
+require('mini.indentscope').setup({
+  -- symbol = '╎',
+  symbol = '.',
+})
 
 local rt = require("rust-tools")
 
@@ -282,7 +284,7 @@ require("oil").setup()
 
 local lsp_signature = require("lsp_signature")
 
-lsp_signature_cfg = {
+local lsp_signature_cfg = {
   debug = false, -- set to true to enable debug logging
   log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log", -- log dir when debug is on
   -- default is  ~/.cache/nvim/lsp_signature.log
@@ -299,7 +301,6 @@ lsp_signature_cfg = {
   max_width = 80, -- max_width of signature floating_window
   noice = false, -- set to true if you using noice to render markdown
   wrap = true, -- allow doc/signature text wrap inside floating_window, useful if your lsp return doc/sig is too long
-  
   floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
 
   floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
@@ -343,28 +344,34 @@ lsp_signature_cfg = {
 
 lsp_signature.setup(lsp_signature_cfg)
 
--- DAP = require('dap')
---
--- local Hydra = require('hydra')
---
--- Hydra({
---    name = 'Debug mode',
---    mode = 'n',
---    body = '<C-p>',
---    heads = {
---       { 'b', ':lua DAP.toggle_breakpoint()<CR>', { desc = 'breakpoint' }},
---       {'c', ':lua DAP.continue()<CR>', { desc = 'continue' }},
---       {'s', ':lua DAP.step_over()<CR>', { desc = 'step over' }},
---       {'i', ':lua DAP.step_into()<CR>', { desc = 'step into' }},
---       {'o', ':lua DAP.step_out()<CR>', { desc = 'step out' }},
---       {'e', ':lua DAP.run_last()<CR>', { desc = 'run last' }},
---       {'q', ':lua DAP.close()<CR>', { desc = 'close' }},
---       { 'h', 'h'},
---       { 'j', 'j'},
---       { 'k', 'k'},
---       { 'l', 'l'},
---    }
--- })
+DAP = require('dap')
+DAP.adapters.lldb = {
+	type = "executable",
+	command = "/usr/bin/lldb", -- adjust as needed
+	name = "lldb",
+}
+
+local lldb = {
+	name = "Launch lldb",
+	type = "lldb", -- matches the adapter
+	request = "launch", -- could also attach to a currently running process
+	program = function()
+		return vim.fn.input(
+			"Path to executable: ",
+			vim.fn.getcwd() .. "/",
+			"file"
+		)
+	end,
+	cwd = "${workspaceFolder}",
+	stopOnEntry = false,
+	args = {},
+	runInTerminal = false,
+}
+
+DAP.configurations.c = {
+	lldb -- different debuggers or more configurations can be used here
+}
+
 
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
@@ -427,6 +434,7 @@ lualine_theme.theme = function()
     visual = "#ffa066",
     replace = "#e46876",
     command = "#e6c384",
+    hydra_color = "#aaff00",
 
   }
   return {
@@ -438,33 +446,41 @@ lualine_theme.theme = function()
     visual = {
       a = { fg = colors.active_color, bg = colors.visual, gui = "bold" },
       b = { fg = colors.active_color, bg = colors.outerbg },
-      c = { fg = colors.active_color, bg = colors.innerbg },
+      c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     replace = {
       a = { fg = colors.active_color, bg = colors.replace, gui = "bold" },
       b = { fg = colors.active_color, bg = colors.outerbg },
-      c = { fg = colors.active_color, bg = colors.innerbg },
+      c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     normal = {
       a = { fg = colors.active_color, bg = colors.normal, gui = "bold" },
       b = { fg = colors.active_color, bg = colors.outerbg },
-      c = { fg = colors.active_color, bg = colors.innerbg },
+      c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     insert = {
       a = { fg = colors.active_color, bg = colors.insert, gui = "bold" },
       b = { fg = colors.active_color, bg = colors.outerbg },
-      c = { fg = colors.active_color, bg = colors.innerbg },
+      c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     command = {
       a = { fg = colors.active_color, bg = colors.command, gui = "bold" },
       b = { fg = colors.active_color, bg = colors.outerbg },
-      c = { fg = colors.active_color, bg = colors.innerbg },
+      c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
   }
 end
 
 local function lualine_selected()
   return [[ ➤]]
+end
+
+local function lualine_hydra()
+  local mode_name = require('hydra.statusline').get_name()
+  if mode_name == nil then
+    return ''
+  end
+  return ' ' .. mode_name .. ' '
 end
 
 require('lualine').setup {
@@ -499,7 +515,7 @@ require('lualine').setup {
       unnamed = '', -- Text to show for unnamed buffers.
       newfile = '[New]',     -- Text to show for newly created file before first write
     }}},
-    lualine_c = {},
+    lualine_c = {lualine_hydra},
     lualine_x = {'diagnostics','diff'},
     lualine_y = {},
     lualine_z = {}
@@ -596,7 +612,7 @@ local hint = [[
  ^ ^              _<Enter>_: Neogit              _q_: exit
 ]]
 Hydra({
-   name = 'Git',
+   name = 'Git mode',
    hint = hint,
    config = {
       buffer = bufnr,
@@ -650,4 +666,80 @@ Hydra({
       { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
       { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
    }
+})
+
+local hint_debug = [[
+ _ol_:  open LLDB    _og_:  open GDB          _r_:  run
+ _e_:   eval word    _fu_:  frame up          _fd_: frame down
+ _si_:  step inst    _sl_:  step line         _so_: step out
+ _c_:   continue     _b_:   toggle breakpoint _q_:  quit
+]]
+
+Hydra({
+   name = 'Debug mode',
+   mode = {'n', 'x'},
+   hint = hint_debug,
+   config = {
+      buffer = bufnr,
+      color = 'pink',
+      invoke_on_body = true,
+      hint = {
+         border = 'rounded',
+         type = "cmdline",
+      },
+    },
+   body = '<C-d>',
+   heads = {
+      {'ol', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open lldb' }},
+      {'og', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open gdb' }},
+      {'r', ':GdbRun<CR>', { desc = 'run'}},
+      {'b', ':GdbBreakpointToggle<CR>', { desc = 'toggle breakpoint'}},
+      {'si', ':GdbStep<CR>', { desc = 'step insruction' }},
+      {'sl', ':GdbNext<CR>', { dec = 'step line'}},
+      {'so', ':GdbFinish<CR>', { dec = 'step out'}},
+      {'c', ':GdbContinue<CR>', { desc = 'continue'}},
+      {'e', ':GdbEvalWord<CR>', { desc = 'eval word'}},
+      {'fu', ':GdbFrameUp<CR>', {desc = 'move frame up'}},
+      {'fd', ':GdbFrameDown<CR>', {desc = 'move frame down'}},
+      {'q', ':GdbDebugStop<CR>', { exit=true, nowait=true, desc = 'quit'}},
+   }
+})
+
+require("catppuccin").setup({
+  color_overrides = {
+    mocha = {
+      base = "#000000",
+      mantle = "#000000",
+      crust = "#000000",
+      surface0 = "#000000",
+      peach = "#ffb282",
+      yellow = "#ffe4a9",
+      red = "#ff7fa3",
+      pink = "#ffb8eb",
+    },
+  }
+})
+
+require("gruvbox").setup({
+  palette_overrides = {
+    dark0 = "#000000",
+    dark1 = "#000000",
+    dark2 = "#000000",
+    dark3 = "#333333",
+    dark4 = "#333333",
+  },
+})
+
+require('kanagawa').setup({
+  colors = {
+    palette = {
+      -- change all usages of these colors
+      dragonBlack0 = "#000000",
+      dragonBlack1 = "#000000",
+      dragonBlack2 = "#000000",
+      dragonBlack3 = "#000000",
+      dragonBlack4 = "#000000",
+      dragonBlack5 = "#000000",
+    },
+  },
 })

@@ -8,8 +8,7 @@ set tabstop=2
 "set softtabstop=4
 set shiftwidth=2
 set smarttab
-set expandtab
-"set noexpandtab set backspace=2 set colorcolumn=100
+set expandtab "set noexpandtab set backspace=2 set colorcolumn=100
 set mouse=a
 set hlsearch
 set cursorline "highlight current line
@@ -64,48 +63,41 @@ set showmatch
 "Format syntax
 syntax on
 
-function! s:costumize_colors()
-
-  "Change color of current number
-  hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
-
-  "Dont highlight vertical line between buffers
-  hi vertsplit guifg=fg guibg=bg
-
-  "Set background transparent
-  highlight LineNr ctermbg=NONE guibg=NONE guifg=#444444
-  hi! Normal ctermbg=NONE guibg=NONE
-  hi! NonText ctermbg=NONE guibg=NONE
-
-  "Hide black lines ~
-  hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
-
-  "Tab background
-  hi TabLineFill term=bold cterm=bold ctermbg=black
-  hi TabLine ctermfg=white ctermbg=black
-  hi TabLineSel ctermfg=white ctermbg=black
-  hi Title ctermfg=white ctermbg=black
-  hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
-  hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
-
-  " Folding bacground color
-  hi Folded guibg=#111111 ctermbg=black ctermfg=white guifg=#aaaaaa
-
-  " hide status bar
-  " hi StatusLine ctermbg=NONE
-  highlight StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
-
-  " Change color of sugn column (for syntax checks)
-  hi SignColumn guibg=black
-endfunction
-autocmd! ColorScheme jelleybeans_flowx08 call s:costumize_colors()
-
-"Color scheme
-"colorscheme badwolf
-"colorscheme mopkai
-"colorscheme jelleybeans
-colorscheme jelleybeans_flowx08
-"colorscheme luna-term
+" function! s:costumize_colors()
+"
+"   "Change color of current number
+"   hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
+"
+"   "Dont highlight vertical line between buffers
+"   hi vertsplit guifg=fg guibg=bg
+"
+"   "Set background transparent
+"   hi LineNr ctermbg=NONE guibg=NONE guifg=#444444
+"   hi! Normal ctermbg=NONE guibg=NONE
+"   hi! NonText ctermbg=NONE guibg=NONE
+"
+"   "Hide black lines ~
+"   hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
+"
+"   "Tab background
+"   hi TabLineFill term=bold cterm=bold ctermbg=black
+"   hi TabLine ctermfg=white ctermbg=black
+"   hi TabLineSel ctermfg=white ctermbg=black
+"   hi Title ctermfg=white ctermbg=black
+"   hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
+"   hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
+"
+"   " Folding bacground color
+"   hi Folded guibg=#111111 ctermbg=black ctermfg=white guifg=#aaaaaa
+"
+"   " hide status bar
+"   " hi StatusLine ctermbg=NONE
+"   hi StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
+"
+"   " Change color of sugn column (for syntax checks)
+"   hi SignColumn guibg=black
+" endfunction
+" autocmd! ColorScheme flowx08 call s:costumize_colors()
 
 " Set the vertical split character to  a space (there is a single space after '\ ')
 set fillchars+=vert:\ 
@@ -322,8 +314,13 @@ Plug 'ggandor/leap.nvim'
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 
-" Debugger
-" Plug 'mfussenegger/nvim-dap'
+" C/C++ Debugging
+
+" Debugger split vertically not horizontally
+let w:nvimgdb_termwin_command = "belowright vnew"
+let w:nvimgdb_codewin_command = "vnew"
+Plug 'sakhnik/nvim-gdb'
+Plug 'mfussenegger/nvim-dap'
 
 " Centering splits 
 Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
@@ -335,6 +332,8 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'folke/tokyonight.nvim'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'nyoom-engineering/oxocarbon.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'ellisonleao/gruvbox.nvim'
 
 " Git stuff
 Plug 'NeogitOrg/neogit'
@@ -371,3 +370,7 @@ set completeopt=menu,menuone,noselect
 autocmd BufWritePre * Neoformat
 
 luafile /Users/carlo/.config/nvim/config.lua
+
+" colorscheme gruvbox
+" colorscheme kanagawa-dragon
+colorscheme flowx08
