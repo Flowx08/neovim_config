@@ -175,57 +175,6 @@ let g:VM_maps = {}
 let g:VM_maps["Select Cursor Down"] = '<C-j>'      " start selecting down
 let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 
-" " Fold - unfold all indentations
-" let g:fs_fold_toggle = 0
-" function! ToggleFoldAll()
-"     if g:fs_fold_toggle == 0
-"         execute 'set foldmethod=indent'
-"         execute 'set foldlevel=0'
-"         let g:fs_fold_toggle = 1
-"     else
-"         execute 'set foldmethod=indent'
-"         execute 'set foldlevel=99'
-"         let g:fs_fold_toggle = 0
-"     endif
-"     execute 'normal! zz'
-" endfunction
-" nnoremap fs :call ToggleFoldAll()<CR>
-"
-" " Set mark with capital M
-" nnoremap M :call SetGlobalMark()<CR>
-"
-" " Jump to mark with lowercase m
-nnoremap m :call JumpToGlobalMark()<CR>
-
-" Set global mark function
-function! SetGlobalMark()
-  let l:char = nr2char(getchar())
-  if l:char =~# '[a-z]'
-    execute 'normal! m' . l:char
-    let g:global_marks[l:char] = [bufnr(), getpos("'".l:char)]
-  else
-    echo 'Only lowercase marks are allowed for global marks'
-  endif
-endfunction
-
-" Jump to global mark function
-function! JumpToGlobalMark()
-  let l:char = nr2char(getchar())
-  if l:char =~# '[a-z]' && has_key(g:global_marks, l:char)
-
-    let l:mark = g:global_marks[l:char]
-    xecute 'buffer ' . l:mark[0] call setpos(".", l:mark[1])
-
-  else
-    echo 'Invalid mark'
-  endif
-endfunction
-
-" Initialize global marks dictionary
-if !exists('g:global_marks')
-  let g:global_marks = {}
-endif
-
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -314,6 +263,9 @@ Plug 'ggandor/leap.nvim'
 " Status line
 Plug 'nvim-lualine/lualine.nvim'
 
+" Tabline
+" Plug 'romgrk/barbar.nvim'
+
 " C/C++ Debugging
 
 " Debugger split vertically not horizontally
@@ -369,8 +321,8 @@ set completeopt=menu,menuone,noselect
 "Automatically format files on save
 autocmd BufWritePre * Neoformat
 
-luafile /Users/carlo/.config/nvim/config.lua
+luafile /home/carlo/.config/nvim/config.lua
 
+colorscheme flowx08
 " colorscheme gruvbox
 " colorscheme kanagawa-dragon
-colorscheme flowx08

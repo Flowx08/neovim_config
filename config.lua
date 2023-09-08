@@ -215,6 +215,7 @@ lspconfig.pyright.setup({})
 lspconfig.rust_analyzer.setup({})
 lspconfig.tsserver.setup({})
 lspconfig.glslls.setup({})
+lspconfig.bashls.setup({})
 
 lspconfig.lua_ls.setup({
   settings = {
@@ -478,7 +479,6 @@ end
 local function lualine_hydra()
   local mode_name = require('hydra.statusline').get_name()
   if mode_name == nil then
-    return ''
   end
   return ' ' .. mode_name .. ' '
 end
@@ -539,6 +539,17 @@ require('lualine').setup {
 }
 
 -- Harpoon setup
+require("harpoon").setup({
+    tabline = true
+})
+
+-- Setup harpoon tabline colors
+vim.cmd('highlight! HarpoonInactive guibg=NONE guifg=#63698c')
+vim.cmd('highlight! HarpoonActive guibg=NONE guifg=white')
+vim.cmd('highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7')
+vim.cmd('highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7')
+vim.cmd('highlight! TabLineFill guibg=NONE guifg=white')
+
 -- mark file with Shift + M
 vim.api.nvim_set_keymap("n", "<S-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
 
@@ -552,7 +563,6 @@ vim.api.nvim_set_keymap("n", "m6", "<cmd>lua require('harpoon.ui').nav_file(6)<C
 
 -- Toggle quich menu with Ctrl + m
 vim.api.nvim_set_keymap("n", "<C-m>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
-
 
 -- Setup neogit
 local neogit = require('neogit')
