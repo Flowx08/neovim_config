@@ -27,7 +27,7 @@ require("toggleterm").setup{
 	size=25,
 	shade_terminals = true, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
 	start_in_insert = true,
-	insert_mappings = true, -- whether or not the open mapping applies in insert mode
+	insert_mappings = false, -- whether or not the open mapping applies in insert mode
 	terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
 	persist_size = true,
 	persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
@@ -538,20 +538,24 @@ require('lualine').setup {
   extensions = {}
 }
 
+-- Setup harpoon tabline colors
+vim.cmd('highlight! HarpoonInactive guibg=NONE guifg=#333333')
+vim.cmd('highlight! HarpoonActive guibg=NONE guifg=#9999ff')
+vim.cmd('highlight! HarpoonNumberActive guibg=NONE guifg=#333333')
+vim.cmd('highlight! HarpoonNumberInactive guibg=NONE guifg=#9999ff')
+vim.cmd('highlight! TabLineFill guibg=NONE guifg=#9999ff')
+
+
 -- Harpoon setup
 require("harpoon").setup({
-    tabline = true
+    tabline = false
 })
-
--- Setup harpoon tabline colors
-vim.cmd('highlight! HarpoonInactive guibg=NONE guifg=#63698c')
-vim.cmd('highlight! HarpoonActive guibg=NONE guifg=white')
-vim.cmd('highlight! HarpoonNumberActive guibg=NONE guifg=#7aa2f7')
-vim.cmd('highlight! HarpoonNumberInactive guibg=NONE guifg=#7aa2f7')
-vim.cmd('highlight! TabLineFill guibg=NONE guifg=white')
 
 -- mark file with Shift + M
 vim.api.nvim_set_keymap("n", "<S-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
+
+-- Toggle quich menu m
+vim.api.nvim_set_keymap("n", "mm", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
 
 -- Navigate to file number X with m + X
 vim.api.nvim_set_keymap("n", "m1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", { noremap = true, silent = true })
@@ -561,8 +565,6 @@ vim.api.nvim_set_keymap("n", "m4", "<cmd>lua require('harpoon.ui').nav_file(4)<C
 vim.api.nvim_set_keymap("n", "m5", "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "m6", "<cmd>lua require('harpoon.ui').nav_file(6)<CR>", { noremap = true, silent = true })
 
--- Toggle quich menu with Ctrl + m
-vim.api.nvim_set_keymap("n", "<C-m>", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
 
 -- Setup neogit
 local neogit = require('neogit')

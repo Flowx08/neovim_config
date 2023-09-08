@@ -321,7 +321,7 @@ set completeopt=menu,menuone,noselect
 "Automatically format files on save
 autocmd BufWritePre * Neoformat
 
-luafile /home/carlo/.config/nvim/config.lua
+luafile /Users/carlo/.config/nvim/config.lua
 
 colorscheme flowx08
 " colorscheme gruvbox
