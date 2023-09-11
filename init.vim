@@ -321,7 +321,7 @@ set completeopt=menu,menuone,noselect
 "Automatically format files on save
 autocmd BufWritePre * Neoformat
 
-luafile /home/carlo/.config/nvim/config.lua
+luafile $HOME/.config/nvim/config.lua
 
 set showtabline=0
 
