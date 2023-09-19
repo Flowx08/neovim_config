@@ -319,7 +319,7 @@ set completeopt=menu,menuone,noselect
 " let g:neoformat_enabled_c = ['clangformat']
 
 "Automatically format files on save
-autocmd BufWritePre * Neoformat
+" autocmd BufWritePre * Neoformat
 
 luafile $HOME/.config/nvim/config.lua
 
