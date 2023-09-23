@@ -20,6 +20,9 @@ vim.diagnostic.config({
   float = { border = "single" },
 })
 
+local telescope = require('telescope')
+telescope.load_extension('fzf')
+
 -- empty setup using defaults
 require("nvim-tree").setup()
 
@@ -416,7 +419,7 @@ vim.keymap.set('n', 'e', function ()
 end)
 
 require("no-neck-pain").setup({
-    width = 89,
+    width = 90,
     autocmds = {
         enableOnVimEnter = true,
     }
