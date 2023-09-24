@@ -16,7 +16,7 @@ set cursorline "highlight current line
 
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
+set nowrap "don't wrap lines
 
 " Hide the status line
 " set laststatus=1
@@ -24,13 +24,6 @@ set noshowmode
 set noruler
 set laststatus=0
 set noshowcmd
-
-" Show file name and modification on window bar
-" set winbar=%m\ %f
-
-" turn hybrid line numbers on
-" set number relativenumber
-" set nu rnu
 
 " HARDMODE
 noremap <Up> <NOP>
@@ -44,8 +37,6 @@ autocmd VimResized * exe "normal \<c-w>="
 " Format the status line
 set statusline=\ %t
 set clipboard+=unnamed
-
-set nowrap "don't wrap lines
 
 set history=1000	"remember more commands and search history
 set undolevels=1000	"use many much levels of undo
@@ -63,63 +54,8 @@ set showmatch
 "Format syntax
 syntax on
 
-" function! s:costumize_colors()
-"
-"   "Change color of current number
-"   hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
-"
-"   "Dont highlight vertical line between buffers
-"   hi vertsplit guifg=fg guibg=bg
-"
-"   "Set background transparent
-"   hi LineNr ctermbg=NONE guibg=NONE guifg=#444444
-"   hi! Normal ctermbg=NONE guibg=NONE
-"   hi! NonText ctermbg=NONE guibg=NONE
-"
-"   "Hide black lines ~
-"   hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
-"
-"   "Tab background
-"   hi TabLineFill term=bold cterm=bold ctermbg=black
-"   hi TabLine ctermfg=white ctermbg=black
-"   hi TabLineSel ctermfg=white ctermbg=black
-"   hi Title ctermfg=white ctermbg=black
-"   hi TabLine gui=NONE guibg=#000000 guifg=#999999 cterm=NONE term=NONE ctermfg=black ctermbg=white
-"   hi TabLineSel gui=NONE guibg=#000000 guifg=#ffffff cterm=NONE term=NONE ctermfg=black ctermbg=white
-"
-"   " Folding bacground color
-"   hi Folded guibg=#111111 ctermbg=black ctermfg=white guifg=#aaaaaa
-"
-"   " hide status bar
-"   " hi StatusLine ctermbg=NONE
-"   hi StatusLine ctermfg=white ctermbg=black guifg=#ffffff guibg=#000000
-"
-"   " Change color of sugn column (for syntax checks)
-"   hi SignColumn guibg=black
-" endfunction
-" autocmd! ColorScheme flowx08 call s:costumize_colors()
-
 " Set the vertical split character to  a space (there is a single space after '\ ')
 set fillchars+=vert:\ 
-
-" " press <Tab> to expand or jump in a snippet. These can also be mapped separately
-" " via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-" imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
-" " -1 for jumping backwards.
-" inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
-"
-" snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
-" snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
-"
-" " For changing choices in choiceNodes (not strictly necessary for a basic setup).
-" imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-" smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-
-" " go lang bin path
-" let g:go_bin_path = expand("/usr/local/go")
-"
-" "livepreview prewviewer
-" let g:livepreview_previewer = 'evince'
 
 " Limit popup menu height
 set pumheight=30
@@ -176,15 +112,6 @@ let g:VM_maps["Select Cursor Down"] = '<C-j>'      " start selecting down
 let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 
 call plug#begin()
-" The default plugin directory will be as follows:
-"   - Vim (Linux/macOS): '~/.vim/plugged'
-"   - Vim (Windows): '~/vimfiles/plugged'
-"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
-" You can specify a custom plugin directory by passing it as the argument
-"   - e.g. `call plug#begin('~/.vim/plugged')`
-"   - Avoid using standard Vim directory names like 'plugin'
-
-" Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
@@ -194,7 +121,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-" Plug 'phaazon/hop.nvim'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'rafamadriz/friendly-snippets'
@@ -287,43 +213,21 @@ Plug 'rebelot/kanagawa.nvim'
 Plug 'nyoom-engineering/oxocarbon.nvim'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'ellisonleao/gruvbox.nvim'
-
 " Git stuff
 Plug 'NeogitOrg/neogit'
 Plug 'lewis6991/gitsigns.nvim'
-
-" For ultisnips users.
-"Plug 'SirVer/ultisnips'
-"Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-" For snippy users.
-" Plug 'dcampos/nvim-snippy'
-" Plug 'dcampos/cmp-snippy'
-
-" Initialize plugin system
-" - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
 
 " For autocompletion plugin
 set completeopt=menu,menuone,noselect
-
-" Setup formatiing for C and C++
-" let g:neoformat_c_clangformat = {
-"       \ 'exe': 'clang-format',
-"       \ 'args': ['-style=file'],
-"       \ }
-" let g:neoformat_cpp_clangformat = {
-"       \ 'exe': 'clang-format',
-"       \ 'args': ['-style=file'],
-"       \ }
-" let g:neoformat_enabled_cpp = ['clangformat']
-" let g:neoformat_enabled_c = ['clangformat']
 
 "Automatically format files on save
 " autocmd BufWritePre * Neoformat
 
 luafile $HOME/.config/nvim/config.lua
 
+" Hide tabline
 set showtabline=0
 
 colorscheme flowx08
+
