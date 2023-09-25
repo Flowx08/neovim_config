@@ -111,123 +111,16 @@ let g:VM_maps = {}
 let g:VM_maps["Select Cursor Down"] = '<C-j>'      " start selecting down
 let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 
-call plug#begin()
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'rafamadriz/friendly-snippets'
-
-" Autocompletion plugin
-" ========================
-Plug 'neovim/nvim-lspconfig'
-Plug 'simrat39/rust-tools.nvim' " rust tools
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-" Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'ray-x/lsp_signature.nvim'
-
-" For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-
-" For luasnip users.
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-
-" latex support
-Plug 'lervag/vimtex'
-
-" Github copilot
-Plug 'github/copilot.vim'
-
-" Comment plugin
-Plug 'numToStr/Comment.nvim'
-
-" Multiple cursors
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
-" TODO comments
-Plug 'folke/todo-comments.nvim'
-
-" Persistent sessions
-Plug 'folke/persistence.nvim'
-
-" Bufferline
-" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-
-" navigation in buffer
-Plug 'stevearc/oil.nvim'
-
-" Autopair parentheses and brackets
-Plug 'windwp/nvim-autopairs'
-
-" Show indentation level
-Plug 'echasnovski/mini.indentscope'
-
-" Log LSP messages
-Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
-
-" hydra
-Plug 'anuvyklack/hydra.nvim'
-
-" Automatic formatting
-Plug 'sbdchd/neoformat'
-
-" Move to word
-Plug 'ggandor/leap.nvim'
-
-" Status line
-Plug 'nvim-lualine/lualine.nvim'
-
-" Tabline
-" Plug 'romgrk/barbar.nvim'
-
-" C/C++ Debugging
-
-" Debugger split vertically not horizontally
-let w:nvimgdb_termwin_command = "belowright vnew"
-let w:nvimgdb_codewin_command = "vnew"
-Plug 'sakhnik/nvim-gdb'
-Plug 'mfussenegger/nvim-dap'
-
-" Centering splits 
-Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
-
-" Harpoon - quick file navigation
-Plug 'ThePrimeagen/harpoon'
-
-" Color schemes
-Plug 'folke/tokyonight.nvim'
-Plug 'rebelot/kanagawa.nvim'
-Plug 'nyoom-engineering/oxocarbon.nvim'
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'ellisonleao/gruvbox.nvim'
-" Git stuff
-Plug 'NeogitOrg/neogit'
-Plug 'lewis6991/gitsigns.nvim'
-call plug#end()
-
 " For autocompletion plugin
 set completeopt=menu,menuone,noselect
 
 "Automatically format files on save
 " autocmd BufWritePre * Neoformat
 
-luafile $HOME/.config/nvim/config.lua
+luafile $HOME/.config/nvim/plugins.lua
+luafile $HOME/.config/nvim/lua/custom/plugins/config.lua
 
 " Hide tabline
 set showtabline=0
 
 colorscheme flowx08
-
