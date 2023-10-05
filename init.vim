@@ -86,7 +86,7 @@ map sj <C-d>
 map gl :tabn<cr>
 map gh :tabp<cr>
 map gk :tabe<cr>
-map gq :tabc<cr>
+map gq :tabclose<cr>
 map vv :vsplit<cr>
 map <C-e> :lua vim.diagnostic.open_float()<cr>
 map ; :Oil<cr>

@@ -87,6 +87,11 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    "chrisgrieser/nvim-spider",
+    lazy = true
+  },
+
 'nvim-tree/nvim-web-devicons',
 'nvim-tree/nvim-tree.lua',
 'nvim-lua/plenary.nvim',
