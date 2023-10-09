@@ -78,7 +78,7 @@ map fh :bp<CR>
 map fd :ClangdSwitchSourceHeader<CR>
 map fq :bd<CR>
 map fc :Telescope colorscheme theme=ivy<cr>
-map fg :Telescope live_grep theme=ivy<cr>
+map fg :lua require("telescope.builtin").live_grep(require('telescope.themes').get_ivy(), { search_dirs = { current_dir() }})<cr>
 map <tt> :ToggleTerm<cr>
 map sl :HopWordCurrentLine<cr>
 map sk <C-u>

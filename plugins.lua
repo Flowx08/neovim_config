@@ -54,9 +54,6 @@ require('lazy').setup({
     },
   },
 
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
-
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -133,3 +130,12 @@ require('lazy').setup({
     border = 'single'
   }
 })
+
+function current_dir()
+  local oil_path = require('oil').get_current_dir()
+  if (oil_path == nil or oil_path == '') then
+    return vim.fn.expand('%:p:h')
+  else
+    return oil_path
+  end
+end
