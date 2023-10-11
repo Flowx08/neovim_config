@@ -72,13 +72,14 @@ map fr :Telescope lsp_references theme=ivy<cr>
 map fe :Telescope diagnostics theme=ivy<cr>
 map fb :Telescope buffers theme=ivy<cr>
 map fs :lua require("telescope.builtin").lsp_document_symbols({ symbols = { "class", "variable", "function", "enum" } })<cr>
+map fo :Telescope oldfiles theme=ivy<cr>
 map ft :TodoTelescope<cr>
 map fl :bn<CR>
 map fh :bp<CR>
 map fd :ClangdSwitchSourceHeader<CR>
 map fq :bd<CR>
 map fc :Telescope colorscheme theme=ivy<cr>
-map fg :lua require("telescope.builtin").live_grep(require('telescope.themes').get_ivy(), { search_dirs = { current_dir() }})<cr>
+map fg :lua require("telescope.builtin").live_grep({ search_dirs = { current_dir() }})<cr>
 map <tt> :ToggleTerm<cr>
 map sl :HopWordCurrentLine<cr>
 map sk <C-u>
