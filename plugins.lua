@@ -139,3 +139,13 @@ function current_dir()
     return oil_path
   end
 end
+
+function terminal_cdir()
+  local wdir = vim.fn.getcwd()
+  local cdir = current_dir()
+  vim.api.nvim_set_current_dir(cdir)
+  vim.cmd('terminal')
+  vim.api.nvim_set_current_dir(wdir)
+  -- Send A key to go insert mode
+  vim.api.nvim_feedkeys('A', 'n', false)
+end

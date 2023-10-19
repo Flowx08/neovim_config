@@ -81,6 +81,7 @@ map fq :bd<CR>
 map fc :Telescope colorscheme theme=ivy<cr>
 map fg :lua require("telescope.builtin").live_grep(require('telescope.themes').get_ivy({ search_dirs = { current_dir() }}))<cr>
 map tt :ToggleTerm<cr>
+map tb :lua terminal_cdir()<cr>
 map tc :lua require('toggleterm.terminal').Terminal:new({dir=current_dir()}):toggle()<cr>
 map sl :HopWordCurrentLine<cr>
 map sk <C-u>
@@ -98,6 +99,9 @@ map sd :lua vim.lsp.buf.definition()<cr>
 " map xh :bp<CR>
 " Center horizontally
 map zh zszH
+
+" Exit terminal mode with escape
+tnoremap <Esc> <C-\><C-n>
 
 " Delete without yanking
 nnoremap d "_d
