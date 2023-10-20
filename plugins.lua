@@ -73,6 +73,7 @@ require('lazy').setup({
         end,
       },
     },
+    lazy = true,
   },
 
   {
@@ -92,43 +93,44 @@ require('lazy').setup({
 'nvim-tree/nvim-web-devicons',
 'nvim-tree/nvim-tree.lua',
 'nvim-lua/plenary.nvim',
-'akinsho/toggleterm.nvim',
-'simrat39/rust-tools.nvim',
+{'akinsho/toggleterm.nvim', lazy = true},
+{'simrat39/rust-tools.nvim', lazy = true},
 'hrsh7th/cmp-buffer',
 'hrsh7th/cmp-path',
 'hrsh7th/cmp-cmdline',
 'ray-x/lsp_signature.nvim',
 'hrsh7th/cmp-vsnip',
 'hrsh7th/vim-vsnip',
-'lervag/vimtex',
+{'lervag/vimtex', lazy = true},
 'github/copilot.vim',
-'numToStr/Comment.nvim',
+{'numToStr/Comment.nvim', lazy = true},
 'mg979/vim-visual-multi',
 'folke/todo-comments.nvim',
 'folke/persistence.nvim',
-'stevearc/oil.nvim',
+{'stevearc/oil.nvim', lazy = true},
 'windwp/nvim-autopairs',
 'echasnovski/mini.indentscope',
 'j-hui/fidget.nvim',
-'anuvyklack/hydra.nvim',
-'sbdchd/neoformat',
+{'anuvyklack/hydra.nvim', lazy = true},
+{'sbdchd/neoformat', lazy = true},
 'ggandor/leap.nvim',
 'nvim-lualine/lualine.nvim',
-'sakhnik/nvim-gdb',
-'mfussenegger/nvim-dap',
-'shortcuts/no-neck-pain.nvim',
-'ThePrimeagen/harpoon',
-'folke/tokyonight.nvim',
-'rebelot/kanagawa.nvim',
-'nyoom-engineering/oxocarbon.nvim',
-'catppuccin/nvim',
-'ellisonleao/gruvbox.nvim',
-'NeogitOrg/neogit',
+{'sakhnik/nvim-gdb', lazy = true},
+{'mfussenegger/nvim-dap', lazy = true},
+{'shortcuts/no-neck-pain.nvim', lazy = true},
+{'ThePrimeagen/harpoon', lazy = true},
+{'catppuccin/nvim', lazy = true},
+{'NeogitOrg/neogit', lazy = true},
 'lewis6991/gitsigns.nvim',
 }, {
   ui = {
     border = 'single'
-  }
+  },
+  config = {
+    defaults = {
+      lazy = true
+    }
+  },
 })
 
 function current_dir()

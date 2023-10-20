@@ -421,7 +421,7 @@ end)
 require("no-neck-pain").setup({
     width = 90,
     autocmds = {
-        enableOnVimEnter = true,
+        enableOnVimEnter = false,
     }
 })
 
@@ -763,53 +763,3 @@ Hydra({
       {'q', ':GdbDebugStop<CR>', { exit=true, nowait=true, desc = 'quit'}},
    }
 })
-
-require("catppuccin").setup({
-  color_overrides = {
-    mocha = {
-      base = "#000000",
-      mantle = "#000000",
-      crust = "#000000",
-      surface0 = "#000000",
-      peach = "#ffb282",
-      yellow = "#ffe4a9",
-      red = "#ff7fa3",
-      pink = "#ffb8eb",
-    },
-  }
-})
-
-require("gruvbox").setup({
-  palette_overrides = {
-    dark0 = "#000000",
-    dark1 = "#000000",
-    dark2 = "#000000",
-    dark3 = "#333333",
-    dark4 = "#333333",
-  },
-})
-
-require('kanagawa').setup({
-  colors = {
-    palette = {
-      -- change all usages of these colors
-      dragonBlack0 = "#000000",
-      dragonBlack1 = "#000000",
-      dragonBlack2 = "#000000",
-      dragonBlack3 = "#000000",
-      dragonBlack4 = "#000000",
-      dragonBlack5 = "#000000",
-    },
-  },
-})
-
-require('mason').setup({
-  ui = {
-    border = "single"
-  }
-})
-
-vim.keymap.set({"n", "o", "x"}, "<S-w>", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
-vim.keymap.set({"n", "o", "x"}, "<S-e>", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
-vim.keymap.set({"n", "o", "x"}, "<S-b>", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
-vim.keymap.set({"n", "o", "x"}, "<S-ge>", "<cmd>lua require('spider').motion('ge')<CR>", { desc = "Spider-ge" })
