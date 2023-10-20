@@ -284,7 +284,11 @@ rt.setup({
 require("fidget").setup()
 
 -- Setup oil (navigation in buffer)
-require("oil").setup()
+require("oil").setup({
+  view_options = {
+    show_hidden = true,
+  }
+})
 
 local lsp_signature = require("lsp_signature")
 
