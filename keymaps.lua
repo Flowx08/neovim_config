@@ -48,7 +48,7 @@ map('n', 'gk', ':tabe<cr>', opts)
 map('n', 'gq', ':tabclose<cr>', opts)
 
 map('n', 'vv', ':vsplit<cr>', opts)
-map('n', 'vh', ':split<cr>', opts)
+map('n', 'vo', ':split<cr>', opts)
 map('n', 'vn', ':NoNeckPain<cr>', opts)
 
 
