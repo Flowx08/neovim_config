@@ -9,7 +9,6 @@ map('n', '<Right>', '<NOP>', opts)
 
 map('n', '<C-s>', ':w<cr>', opts)
 map('n', '<C-r>', ':%s/r1/r2/g', opts)
-map('n', '<C-b>', ':NvimTreeToggle<cr>', opts)
 
 -- Iterfaces to jump between files and withing file relevant locations
 map('n', 'ff', ':Telescope find_files theme=ivy<cr>', opts)

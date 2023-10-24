@@ -23,9 +23,6 @@ vim.diagnostic.config({
 local telescope = require('telescope')
 telescope.load_extension('fzf')
 
--- empty setup using defaults
-require("nvim-tree").setup()
-
 require("toggleterm").setup{
 	size=25,
 	shade_terminals = true, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false

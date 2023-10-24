@@ -89,9 +89,7 @@ require('lazy').setup({
     "chrisgrieser/nvim-spider",
     lazy = true
   },
-
 'nvim-tree/nvim-web-devicons',
-'nvim-tree/nvim-tree.lua',
 'nvim-lua/plenary.nvim',
 {'akinsho/toggleterm.nvim', lazy = true},
 {'simrat39/rust-tools.nvim', lazy = true},
