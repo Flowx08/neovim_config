@@ -63,5 +63,8 @@ let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 " For autocompletion plugin
 set completeopt=menu,menuone,noselect
 
+" Highlight trailing whitespaces
+match errorMsg /\s\+$/
+
 "Automatically format files on save
 " autocmd BufWritePre * Neoformat

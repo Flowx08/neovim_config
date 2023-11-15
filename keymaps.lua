@@ -25,6 +25,7 @@ map('n', 'fd', ':ClangdSwitchSourceHeader<CR>', opts)
 map('n', 'fq', ':bd<CR>', opts)
 map('n', 'fc', ':Telescope colorscheme theme=ivy<cr>', opts)
 map('n', 'fg', ':lua require("telescope.builtin").live_grep(require("telescope.themes").get_ivy({ search_dirs = { current_dir() }}))<cr>', opts)
+map('n', 'fm', ':Telescope marks theme=ivy<cr>', opts)
 
 -- Terminal commands
 -- Open floating terminal in current working directory

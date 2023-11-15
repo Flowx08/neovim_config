@@ -603,6 +603,9 @@ local Hydra = require('hydra')
 
 -- Harpoon setup
 require("harpoon").setup({
+    menu = {
+        width = math.floor(vim.api.nvim_win_get_width(0) * 0.75),
+    },
     tabline = true
 })
 
@@ -631,7 +634,7 @@ Hydra({
       end,
    },
    mode = {'n'},
-   body = 'm',
+   body = ",",
    heads = {
       {'q', nil, { exit = true }},
       {'f', '<cmd>lua require("harpoon.mark").add_file()<CR>', {silent=true, exit=true}},
@@ -649,7 +652,7 @@ Hydra({
    }
 })
 
--- -- mark file with Shift + M
+-- mark file with Shift + M
 -- vim.api.nvim_set_keymap("n", "<S-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
 --
 -- -- Toggle quich menu m
