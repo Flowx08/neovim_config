@@ -767,3 +767,27 @@ Hydra({
       {'q', ':GdbDebugStop<CR>', { exit=true, nowait=true, desc = 'quit'}},
    }
 })
+
+function ToggleCHeaderSource()
+    local file = vim.fn.expand('%:p')
+    if file:match('.c$') then
+        -- Switch to .h
+        file = file:gsub('.c$', '.h')
+    elseif file:match('.h$') then
+        -- Switch to .c
+        file = file:gsub('.h$', '.c')
+    else
+        print('Not a .c or .h file')
+        return
+    end
+
+    if vim.fn.filereadable(file) == 1 then
+        vim.cmd('edit ' .. file)
+    else
+        print('File does not exist: ' .. file)
+    end
+end
+
+vim.api.nvim_create_user_command('ToggleCH', ToggleCHeaderSource, {})
+
+

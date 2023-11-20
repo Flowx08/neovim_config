@@ -110,7 +110,7 @@ require('lazy').setup({
 'echasnovski/mini.indentscope',
 'j-hui/fidget.nvim',
 {'anuvyklack/hydra.nvim', lazy = true},
-{'sbdchd/neoformat', lazy = true},
+'sbdchd/neoformat',
 'ggandor/leap.nvim',
 'nvim-lualine/lualine.nvim',
 {'sakhnik/nvim-gdb', lazy = true},
