@@ -24,65 +24,65 @@ local telescope = require('telescope')
 telescope.load_extension('fzf')
 
 require("toggleterm").setup{
-	size=25,
-	shade_terminals = true, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
-	start_in_insert = true,
-	insert_mappings = false, -- whether or not the open mapping applies in insert mode
-	terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
-	persist_size = true,
-	persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
-	direction = 'float',
-	close_on_exit = true, -- close the terminal window when the process exits
-	shell = vim.o.shell, -- change the default shell
-	auto_scroll = true, -- automatically scroll to the bottom on terminal output
-	open_mapping = [[tt]],
-	-- This field is only relevant if direction is set to 'float'
+  size=25,
+  shade_terminals = true, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
+  start_in_insert = true,
+  insert_mappings = false, -- whether or not the open mapping applies in insert mode
+  terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
+  persist_size = true,
+  persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
+  direction = 'float',
+  close_on_exit = true, -- close the terminal window when the process exits
+  shell = vim.o.shell, -- change the default shell
+  auto_scroll = true, -- automatically scroll to the bottom on terminal output
+  open_mapping = [[tt]],
+  -- This field is only relevant if direction is set to 'float'
 }
 
 require('nvim-web-devicons').setup({
-	-- your personnal icons can go here (to override)
-	-- you can specify color or cterm_color instead of specifying both of them
-	-- DevIcon will be appended to `name`
-	override = {
-		zsh = {
-			icon = "",
-			color = "#428850",
-			cterm_color = "65",
-			name = "Zsh"
-		}
-	};
-	-- globally enable different highlight colors per icon (default to true)
-	-- if set to false all icons will have the default icon's color
-	color_icons = true;
-	-- globally enable default icons (default to false)
-	-- will get overriden by `get_icons` option
-	default = true;
+  -- your personnal icons can go here (to override)
+  -- you can specify color or cterm_color instead of specifying both of them
+  -- DevIcon will be appended to `name`
+  override = {
+    zsh = {
+      icon = "",
+      color = "#428850",
+      cterm_color = "65",
+      name = "Zsh"
+    }
+  };
+  -- globally enable different highlight colors per icon (default to true)
+  -- if set to false all icons will have the default icon's color
+  color_icons = true;
+  -- globally enable default icons (default to false)
+  -- will get overriden by `get_icons` option
+  default = true;
 })
 
 require('nvim-treesitter.configs').setup({
-	-- A list of parser names, or "all"
-	ensure_installed = { "c", "cpp", "python" },
+  -- A list of parser names, or "all"
+  ensure_installed = { "c", "cpp", "python" },
 
-	-- Install parsers synchronously (only applied to `ensure_installed`)
-	sync_install = false,
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
 
-	-- Automatically install missing parsers when entering buffer
-	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-	auto_install = true,
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
 
-	---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-	-- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
-	highlight = {
-		-- `false` will disable the whole extension
-		enable = true,
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
 
-		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-		-- Using this option may slow down your editor, and you may see some duplicate highlights.
-		-- Instead of true it can also be a list of languages
-		additional_vim_regex_highlighting = false,
-	},
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -91,111 +91,111 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local cmp = require('cmp')
 
 cmp.setup({
-	snippet = {
-		-- REQUIRED - you must specify a snippet engine
-		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-		end,
-	},
-	formatting = {
-		fields = {'menu', 'abbr', 'kind'},
-    format = function(entry, item)
-        -- Define menu shorthand for different completion sources.
-        local menu_icon = {
-            nvim_lsp = "NLSP",
-            nvim_lua = "NLUA",
-            luasnip  = "LSNP",
-            buffer   = "BUFF",
-            path     = "PATH",
-        }
-        -- Set the menu "icon" to the shorthand for each completion source.
-        item.menu = menu_icon[entry.source.name]
-
-        -- Set the fixed width of the completion menu to 60 characters.
-        local fixed_width = 60
-
-        -- Set 'fixed_width' to false if not provided.
-        fixed_width = fixed_width or false
-
-        -- Get the completion entry text shown in the completion window.
-        local content = item.abbr
-
-        -- Set the fixed completion window width.
-        if fixed_width then
-            vim.o.pumwidth = fixed_width
-        end
-
-        -- Get the width of the current window.
-        local win_width = vim.api.nvim_win_get_width(0)
-
-        -- Set the max content width based on either: 'fixed_width'
-        -- or a percentage of the window width, in this case 20%.
-        -- We subtract 10 from 'fixed_width' to leave room for 'kind' fields.
-        local max_content_width = fixed_width and fixed_width - 10 or math.floor(win_width * 0.2)
-
-        -- Truncate the completion entry text if it's longer than the
-        -- max content width. We subtract 3 from the max content width
-        -- to account for the "..." that will be appended to it.
-        if #content > max_content_width then
-            item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. "..."
-        else
-            item.abbr = content .. (" "):rep(max_content_width - #content)
-        end
-        return item
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
-	},
-	window = {
-		-- documentation = cmp.config.window.bordered(),
-		-- completion = cmp.config.window.bordered(),
-	},
-	mapping = cmp.mapping.preset.insert({
-		['<C-b>'] = cmp.mapping.scroll_docs(1),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.abort(),
-		['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-	}),
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		-- { name = 'vsnip' }, -- For vsnip users.
-		{ name = 'luasnip' }, -- For luasnip users.
-		-- { name = 'ultisnips' }, -- For ultisnips users.
-		-- { name = 'snippy' }, -- For snippy users.
+  },
+  formatting = {
+    fields = {'menu', 'abbr', 'kind'},
+    format = function(entry, item)
+      -- Define menu shorthand for different completion sources.
+      local menu_icon = {
+        nvim_lsp = "NLSP",
+        nvim_lua = "NLUA",
+        luasnip  = "LSNP",
+        buffer   = "BUFF",
+        path     = "PATH",
+      }
+      -- Set the menu "icon" to the shorthand for each completion source.
+      item.menu = menu_icon[entry.source.name]
+
+      -- Set the fixed width of the completion menu to 60 characters.
+      local fixed_width = 60
+
+      -- Set 'fixed_width' to false if not provided.
+      fixed_width = fixed_width or false
+
+      -- Get the completion entry text shown in the completion window.
+      local content = item.abbr
+
+      -- Set the fixed completion window width.
+      if fixed_width then
+        vim.o.pumwidth = fixed_width
+      end
+
+      -- Get the width of the current window.
+      local win_width = vim.api.nvim_win_get_width(0)
+
+      -- Set the max content width based on either: 'fixed_width'
+      -- or a percentage of the window width, in this case 20%.
+      -- We subtract 10 from 'fixed_width' to leave room for 'kind' fields.
+      local max_content_width = fixed_width and fixed_width - 10 or math.floor(win_width * 0.2)
+
+      -- Truncate the completion entry text if it's longer than the
+      -- max content width. We subtract 3 from the max content width
+      -- to account for the "..." that will be appended to it.
+      if #content > max_content_width then
+        item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. "..."
+      else
+        item.abbr = content .. (" "):rep(max_content_width - #content)
+      end
+      return item
+    end,
+  },
+  window = {
+    -- documentation = cmp.config.window.bordered(),
+    -- completion = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(1),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    -- { name = 'vsnip' }, -- For vsnip users.
+    { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
     -- { name = 'nvim_lsp_signature_help' } -- For signature help
     -- { name = "lsp_signature"}
-	}, {
-		{ name = 'buffer' },
-	})
+  }, {
+    { name = 'buffer' },
+  })
 })
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources({
-		{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-	}, {
-		{ name = 'buffer' },
-	})
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = 'buffer' },
+  })
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = 'buffer' }
-	}
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
-		{ name = 'cmdline' }
-	})
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })
 
 -- Setup cland and python autocompletion
@@ -296,11 +296,11 @@ local lsp_signature_cfg = {
   verbose = false, -- show debug line number
 
   bind = true, -- This is mandatory, otherwise border config won't get registered.
-               -- If you want to hook lspsaga or other signature handler, pls set to false
+  -- If you want to hook lspsaga or other signature handler, pls set to false
   doc_lines = 10, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
-                 -- set to 0 if you DO NOT want any API comments be shown
-                 -- This setting only take effect in insert mode, it does not affect signature help in normal
-                 -- mode, 10 by default
+  -- set to 0 if you DO NOT want any API comments be shown
+  -- This setting only take effect in insert mode, it does not affect signature help in normal
+  -- mode, 10 by default
 
   max_height = 12, -- max height of signature floating_window
   max_width = 80, -- max_width of signature floating_window
@@ -313,9 +313,9 @@ local lsp_signature_cfg = {
   -- this setting will be helpful if you do not want the PUM and floating win overlap
 
   floating_window_off_x = 1, -- adjust float windows x position. 
-                             -- can be either a number or function
+  -- can be either a number or function
   floating_window_off_y = 0, -- adjust float windows y position. e.g -2 move window up 2 lines; 2 move down 2 lines
-                              -- can be either number or function, see examples
+  -- can be either number or function, see examples
 
   close_timeout = 4000, -- close floating window after ms when laster parameter is entered
   fix_pos = false,  -- set to true, the floating window will not auto-close until finish all parameters
@@ -351,30 +351,30 @@ lsp_signature.setup(lsp_signature_cfg)
 
 DAP = require('dap')
 DAP.adapters.lldb = {
-	type = "executable",
-	command = "/usr/bin/lldb", -- adjust as needed
-	name = "lldb",
+  type = "executable",
+  command = "/usr/bin/lldb", -- adjust as needed
+  name = "lldb",
 }
 
 local lldb = {
-	name = "Launch lldb",
-	type = "lldb", -- matches the adapter
-	request = "launch", -- could also attach to a currently running process
-	program = function()
-		return vim.fn.input(
-			"Path to executable: ",
-			vim.fn.getcwd() .. "/",
-			"file"
-		)
-	end,
-	cwd = "${workspaceFolder}",
-	stopOnEntry = false,
-	args = {},
-	runInTerminal = false,
+  name = "Launch lldb",
+  type = "lldb", -- matches the adapter
+  request = "launch", -- could also attach to a currently running process
+  program = function()
+    return vim.fn.input(
+    "Path to executable: ",
+    vim.fn.getcwd() .. "/",
+    "file"
+    )
+  end,
+  cwd = "${workspaceFolder}",
+  stopOnEntry = false,
+  args = {},
+  runInTerminal = false,
 }
 
 DAP.configurations.c = {
-	lldb -- different debuggers or more configurations can be used here
+  lldb -- different debuggers or more configurations can be used here
 }
 
 
@@ -388,7 +388,7 @@ vim.keymap.del({'x', 'o'}, 'X')
 vim.api.nvim_set_hl(0, 'LeapBackdrop', {
   link = 'Comment',
 }
-  ) -- or some grey
+) -- or some grey
 vim.api.nvim_set_hl(0, 'LeapMatch', {
   -- For light themes, set to 'black' or similar.
   fg = 'white', bold = true, nocombine = true,
@@ -420,10 +420,10 @@ vim.keymap.set('n', 'e', function ()
 end)
 
 require("no-neck-pain").setup({
-    width = 90,
-    autocmds = {
-        enableOnVimEnter = true,
-    }
+  width = 82,
+  autocmds = {
+    enableOnVimEnter = true,
+  }
 })
 
 local lualine_theme = {}
@@ -603,53 +603,53 @@ local Hydra = require('hydra')
 
 -- Harpoon setup
 require("harpoon").setup({
-    menu = {
-        width = math.floor(vim.api.nvim_win_get_width(0) * 0.75),
-    },
-    tabline = true
+  menu = {
+    width = math.floor(vim.api.nvim_win_get_width(0) * 0.75),
+  },
+  tabline = true
 })
 
 local hint = [[
- _m_: toggle menu   _f_: mark file  _q_: quit     _<ESC>_: quit
- _1_: file 1        _2_: file 2     _3_: file 3   _4_: file 4
- _5_: file 5        _6_: file 6     _7_: file 7   _8_: file 8
- _9_: file 9
+_m_: toggle menu   _f_: mark file  _q_: quit     _<ESC>_: quit
+_1_: file 1        _2_: file 2     _3_: file 3   _4_: file 4
+_5_: file 5        _6_: file 6     _7_: file 7   _8_: file 8
+_9_: file 9
 ]]
 
 Hydra({
-   name = 'Harpoon mode',
-   -- hint = hint,
-   config = {
-      buffer = bufnr,
-      color = 'pink',
-      invoke_on_body = true,
-      hint = {
-         border = 'rounded',
-      },
-      on_enter = function()
-         vim.cmd 'set showtabline=2'
-      end,
-      on_exit = function()
-         vim.cmd 'set showtabline=0'
-      end,
-   },
-   mode = {'n'},
-   body = ",",
-   heads = {
-      {'q', nil, { exit = true }},
-      {'f', '<cmd>lua require("harpoon.mark").add_file()<CR>', {silent=true, exit=true}},
-      {'<ESC>', nil, { exit = true }},
-      {'m', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', {silent=true}},
-      {'1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', {silent=true, exit=true}},
-      {'2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', {silent=true, exit=true}},
-      {'3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', {silent=true, exit=true}},
-      {'4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', {silent=true, exit=true}},
-      {'5', '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', {silent=true, exit=true}},
-      {'6', '<cmd>lua require("harpoon.ui").nav_file(6)<CR>', {silent=true, exit=true}},
-      {'7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', {silent=true, exit=true}},
-      {'8', '<cmd>lua require("harpoon.ui").nav_file(8)<CR>', {silent=true, exit=true}},
-      {'9', '<cmd>lua require("harpoon.ui").nav_file(9)<CR>', {silent=true, exit=true}},
-   }
+  name = 'Harpoon mode',
+  -- hint = hint,
+  config = {
+    buffer = bufnr,
+    color = 'pink',
+    invoke_on_body = true,
+    hint = {
+      border = 'rounded',
+    },
+    on_enter = function()
+      vim.cmd 'set showtabline=2'
+    end,
+    on_exit = function()
+      vim.cmd 'set showtabline=0'
+    end,
+  },
+  mode = {'n'},
+  body = "m",
+  heads = {
+    {'q', nil, { exit = true }},
+    {'f', '<cmd>lua require("harpoon.mark").add_file()<CR>', {silent=true, exit=true}},
+    {'<ESC>', nil, { exit = true }},
+    {'m', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', {silent=true}},
+    {'1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', {silent=true, exit=true}},
+    {'2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', {silent=true, exit=true}},
+    {'3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', {silent=true, exit=true}},
+    {'4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', {silent=true, exit=true}},
+    {'5', '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', {silent=true, exit=true}},
+    {'6', '<cmd>lua require("harpoon.ui").nav_file(6)<CR>', {silent=true, exit=true}},
+    {'7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', {silent=true, exit=true}},
+    {'8', '<cmd>lua require("harpoon.ui").nav_file(8)<CR>', {silent=true, exit=true}},
+    {'9', '<cmd>lua require("harpoon.ui").nav_file(9)<CR>', {silent=true, exit=true}},
+  }
 })
 
 -- mark file with Shift + M
@@ -668,124 +668,124 @@ Hydra({
 
 
 local hint = [[
- _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
- _K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
- ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
- ^
- ^ ^              _<Enter>_: Neogit              _q_: exit
+_J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
+_K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
+^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
+^
+^ ^              _<Enter>_: Neogit              _q_: exit
 ]]
 Hydra({
-   name = 'Git mode',
-   hint = hint,
-   config = {
-      buffer = bufnr,
-      color = 'pink',
-      invoke_on_body = true,
-      hint = {
-         border = 'rounded'
-      },
-      on_enter = function()
-         vim.cmd 'mkview'
-         vim.cmd 'silent! %foldopen!'
-         vim.bo.modifiable = false
-         gitsigns.toggle_signs(true)
-         gitsigns.toggle_linehl(true)
-      end,
-      on_exit = function()
-         local cursor_pos = vim.api.nvim_win_get_cursor(0)
-         vim.cmd 'loadview'
-         vim.api.nvim_win_set_cursor(0, cursor_pos)
-         vim.cmd 'normal zv'
-         gitsigns.toggle_signs(false)
-         gitsigns.toggle_linehl(false)
-         gitsigns.toggle_deleted(false)
-      end,
-   },
-   mode = {'n','x'},
-   body = '<C-g>',
-   heads = {
-      { 'J',
-         function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gitsigns.next_hunk() end)
-            return '<Ignore>'
-         end,
-         { expr = true, desc = 'next hunk' } },
-      { 'K',
-         function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gitsigns.prev_hunk() end)
-            return '<Ignore>'
-         end,
-         { expr = true, desc = 'prev hunk' } },
-      { 's', ':Gitsigns stage_hunk<CR>', { silent = true, desc = 'stage hunk' } },
-      { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
-      { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
-      { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
-      { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
-      { 'b', gitsigns.blame_line, { desc = 'blame' } },
-      { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
-      { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
-      { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
-      { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
-   }
+  name = 'Git mode',
+  hint = hint,
+  config = {
+    buffer = bufnr,
+    color = 'pink',
+    invoke_on_body = true,
+    hint = {
+      border = 'rounded'
+    },
+    on_enter = function()
+      vim.cmd 'mkview'
+      vim.cmd 'silent! %foldopen!'
+      vim.bo.modifiable = false
+      gitsigns.toggle_signs(true)
+      gitsigns.toggle_linehl(true)
+    end,
+    on_exit = function()
+      local cursor_pos = vim.api.nvim_win_get_cursor(0)
+      vim.cmd 'loadview'
+      vim.api.nvim_win_set_cursor(0, cursor_pos)
+      vim.cmd 'normal zv'
+      gitsigns.toggle_signs(false)
+      gitsigns.toggle_linehl(false)
+      gitsigns.toggle_deleted(false)
+    end,
+  },
+  mode = {'n','x'},
+  body = '<C-g>',
+  heads = {
+    { 'J',
+    function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gitsigns.next_hunk() end)
+      return '<Ignore>'
+    end,
+    { expr = true, desc = 'next hunk' } },
+    { 'K',
+    function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gitsigns.prev_hunk() end)
+      return '<Ignore>'
+    end,
+    { expr = true, desc = 'prev hunk' } },
+    { 's', ':Gitsigns stage_hunk<CR>', { silent = true, desc = 'stage hunk' } },
+    { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
+    { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
+    { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
+    { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
+    { 'b', gitsigns.blame_line, { desc = 'blame' } },
+    { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
+    { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
+    { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
+    { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
+  }
 })
 
 local hint_debug = [[
- _ol_:  open LLDB    _og_:  open GDB          _r_:  run
- _e_:   eval word    _fu_:  frame up          _fd_: frame down
- _si_:  step inst    _sl_:  step line         _so_: step out
- _c_:   continue     _b_:   toggle breakpoint _q_:  quit
+_ol_:  open LLDB    _og_:  open GDB          _r_:  run
+_e_:   eval word    _fu_:  frame up          _fd_: frame down
+_si_:  step inst    _sl_:  step line         _so_: step out
+_c_:   continue     _b_:   toggle breakpoint _q_:  quit
 ]]
 
 Hydra({
-   name = 'Debug mode',
-   mode = {'n', 'x'},
-   hint = hint_debug,
-   config = {
-      buffer = bufnr,
-      color = 'pink',
-      invoke_on_body = true,
-      hint = {
-         border = 'rounded',
-         type = "cmdline",
-      },
+  name = 'Debug mode',
+  mode = {'n', 'x'},
+  hint = hint_debug,
+  config = {
+    buffer = bufnr,
+    color = 'pink',
+    invoke_on_body = true,
+    hint = {
+      border = 'rounded',
+      type = "cmdline",
     },
-   body = '<S-d>',
-   heads = {
-      {'ol', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open lldb' }},
-      {'og', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open gdb' }},
-      {'r', ':GdbRun<CR>', { desc = 'run'}},
-      {'b', ':GdbBreakpointToggle<CR>', { desc = 'toggle breakpoint'}},
-      {'si', ':GdbStep<CR>', { desc = 'step insruction' }},
-      {'sl', ':GdbNext<CR>', { dec = 'step line'}},
-      {'so', ':GdbFinish<CR>', { dec = 'step out'}},
-      {'c', ':GdbContinue<CR>', { desc = 'continue'}},
-      {'e', ':GdbEvalWord<CR>', { desc = 'eval word'}},
-      {'fu', ':GdbFrameUp<CR>', {desc = 'move frame up'}},
-      {'fd', ':GdbFrameDown<CR>', {desc = 'move frame down'}},
-      {'q', ':GdbDebugStop<CR>', { exit=true, nowait=true, desc = 'quit'}},
-   }
+  },
+  body = '<S-d>',
+  heads = {
+    {'ol', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open lldb' }},
+    {'og', ':GdbStartLLDB lldb ./bin/main\n', { desc = 'open gdb' }},
+    {'r', ':GdbRun<CR>', { desc = 'run'}},
+    {'b', ':GdbBreakpointToggle<CR>', { desc = 'toggle breakpoint'}},
+    {'si', ':GdbStep<CR>', { desc = 'step insruction' }},
+    {'sl', ':GdbNext<CR>', { dec = 'step line'}},
+    {'so', ':GdbFinish<CR>', { dec = 'step out'}},
+    {'c', ':GdbContinue<CR>', { desc = 'continue'}},
+    {'e', ':GdbEvalWord<CR>', { desc = 'eval word'}},
+    {'fu', ':GdbFrameUp<CR>', {desc = 'move frame up'}},
+    {'fd', ':GdbFrameDown<CR>', {desc = 'move frame down'}},
+    {'q', ':GdbDebugStop<CR>', { exit=true, nowait=true, desc = 'quit'}},
+  }
 })
 
 function ToggleCHeaderSource()
-    local file = vim.fn.expand('%:p')
-    if file:match('.c$') then
-        -- Switch to .h
-        file = file:gsub('.c$', '.h')
-    elseif file:match('.h$') then
-        -- Switch to .c
-        file = file:gsub('.h$', '.c')
-    else
-        print('Not a .c or .h file')
-        return
-    end
+  local file = vim.fn.expand('%:p')
+  if file:match('.c$') then
+    -- Switch to .h
+    file = file:gsub('.c$', '.h')
+  elseif file:match('.h$') then
+    -- Switch to .c
+    file = file:gsub('.h$', '.c')
+  else
+    print('Not a .c or .h file')
+    return
+  end
 
-    if vim.fn.filereadable(file) == 1 then
-        vim.cmd('edit ' .. file)
-    else
-        print('File does not exist: ' .. file)
-    end
+  if vim.fn.filereadable(file) == 1 then
+    vim.cmd('edit ' .. file)
+  else
+    print('File does not exist: ' .. file)
+  end
 end
 
 vim.api.nvim_create_user_command('ToggleCH', ToggleCHeaderSource, {})

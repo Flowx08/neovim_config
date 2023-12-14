@@ -4,19 +4,41 @@ set ruler
 set number
 "set nonumber
 set autoindent
-set tabstop=2
-"set softtabstop=4
-set shiftwidth=2
-set smarttab
-set expandtab "set noexpandtab set backspace=2 set colorcolumn=100
 set mouse=a
 set hlsearch
 set cursorline "highlight current line
+set list listchars=tab:»\ ,trail:·,extends:…,precedes:…
+set colorcolumn=81
 "set scrolloff=9999 "keep cursor in the middle of the screen
 
 set ai "Auto indent
 set si "Smart indent
 set nowrap "don't wrap lines
+
+" indentation styles
+function IndentDefault()
+  set tabstop=2
+  set shiftwidth=2
+  set smarttab
+  set expandtab
+endfunction
+
+function IndentWide()
+  set noexpandtab
+  set tabstop=4
+  set shiftwidth=4
+  set softtabstop=4
+endfunction
+
+function IndentLinux()
+  set noexpandtab
+  set tabstop=8
+  set shiftwidth=8
+  set softtabstop=8
+endfunction
+
+" default indentation mode
+call IndentLinux()
 
 " Hide the status line
 " set laststatus=1
@@ -32,8 +54,8 @@ autocmd VimResized * exe "normal \<c-w>="
 set statusline=\ %t
 set clipboard+=unnamed
 
-set history=1000	"remember more commands and search history
-set undolevels=1000	"use many much levels of undo
+set history=1000        "remember more commands and search history
+set undolevels=1000     "use many much levels of undo
 
 "Don't write a backup file
 set nobackup
@@ -64,7 +86,7 @@ let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 set completeopt=menu,menuone,noselect
 
 " Highlight trailing whitespaces
-match errorMsg /\s\+$/
+" match errorMsg /\s\+$/
 
 "Automatically format files on save
 " autocmd BufWritePre * Neoformat
