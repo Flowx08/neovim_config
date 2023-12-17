@@ -59,6 +59,8 @@ require('nvim-web-devicons').setup({
   default = true;
 })
 
+require("smartcolumn").setup()
+
 require('nvim-treesitter.configs').setup({
   -- A list of parser names, or "all"
   ensure_installed = { "c", "cpp", "python" },
@@ -258,12 +260,6 @@ require("persistence").setup()
 
 -- Setup nvim-autopairs (auto completion of brackets)
 require("nvim-autopairs").setup()
-
--- Setup mini.indentscope (show indents)
-require('mini.indentscope').setup({
-  -- symbol = '╎',
-  symbol = '.',
-})
 
 local rt = require("rust-tools")
 

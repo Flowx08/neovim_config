@@ -31,7 +31,8 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+      -- NOTE: `opts = {}` is the same as calling 
+      -- `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
@@ -67,7 +68,8 @@ require('lazy').setup({
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
+        --       refer to the README for telescope-fzf-native
+	--       for more instructions.
         build = 'make',
         cond = function()
           return vim.fn.executable 'make' == 1
@@ -102,13 +104,13 @@ require('lazy').setup({
   'hrsh7th/vim-vsnip',
   {'lervag/vimtex', lazy = true},
   'github/copilot.vim',
+  'm4xshen/smartcolumn.nvim',
   {'numToStr/Comment.nvim', lazy = true},
   'mg979/vim-visual-multi',
   'folke/todo-comments.nvim',
   'folke/persistence.nvim',
   {'stevearc/oil.nvim', lazy = true},
   'windwp/nvim-autopairs',
-  'echasnovski/mini.indentscope',
   'j-hui/fidget.nvim',
   {'anuvyklack/hydra.nvim', lazy = true},
   'sbdchd/neoformat',

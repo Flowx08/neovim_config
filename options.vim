@@ -70,7 +70,8 @@ set showmatch
 "Format syntax
 syntax on
 
-" Set the vertical split character to  a space (there is a single space after '\ ')
+" Set the vertical split character to  a space (there is a single space
+" after '\ ')
 set fillchars+=vert:\ 
 
 " Limit popup menu height
