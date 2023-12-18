@@ -38,7 +38,7 @@ function IndentLinux()
 endfunction
 
 " default indentation mode
-call IndentLinux()
+call IndentDefault()
 
 " Hide the status line
 " set laststatus=1
@@ -87,7 +87,19 @@ let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 set completeopt=menu,menuone,noselect
 
 " Highlight trailing whitespaces
-" match errorMsg /\s\+$/
+function ToggleTrailing()
+  if !exists('b:toggle_trailing')
+    let b:toggle_trailing = 1
+  endif
+  if b:toggle_trailing == 1
+    highlight TrailingWhitespace ctermbg=red guibg=red
+    match TrailingWhitespace /\s\+$/
+    let b:toggle_trailing = 0
+  else
+    match TrailingWhitespace NONE
+    let b:toggle_trailing = 1
+  endif
+endfunction
 
 "Automatically format files on save
-" autocmd BufWritePre * Neoformat
+
