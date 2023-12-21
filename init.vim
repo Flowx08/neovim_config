@@ -1,3 +1,4 @@
+source $HOME/.config/nvim/functions.vim
 source $HOME/.config/nvim/options.vim
 luafile $HOME/.config/nvim/plugins.lua
 luafile $HOME/.config/nvim/lua/custom/plugins/setup.lua

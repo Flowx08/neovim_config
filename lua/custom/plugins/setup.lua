@@ -606,64 +606,6 @@ require("harpoon").setup({
 })
 
 local hint = [[
-_m_: toggle menu   _f_: mark file  _q_: quit     _<ESC>_: quit
-_1_: file 1        _2_: file 2     _3_: file 3   _4_: file 4
-_5_: file 5        _6_: file 6     _7_: file 7   _8_: file 8
-_9_: file 9
-]]
-
-Hydra({
-  name = 'Harpoon mode',
-  -- hint = hint,
-  config = {
-    buffer = bufnr,
-    color = 'pink',
-    invoke_on_body = true,
-    hint = {
-      border = 'rounded',
-    },
-    on_enter = function()
-      vim.cmd 'set showtabline=2'
-    end,
-    on_exit = function()
-      vim.cmd 'set showtabline=0'
-    end,
-  },
-  mode = {'n'},
-  body = "m",
-  heads = {
-    {'q', nil, { exit = true }},
-    {'f', '<cmd>lua require("harpoon.mark").add_file()<CR>', {silent=true, exit=true}},
-    {'<ESC>', nil, { exit = true }},
-    {'m', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', {silent=true}},
-    {'1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', {silent=true, exit=true}},
-    {'2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', {silent=true, exit=true}},
-    {'3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', {silent=true, exit=true}},
-    {'4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', {silent=true, exit=true}},
-    {'5', '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', {silent=true, exit=true}},
-    {'6', '<cmd>lua require("harpoon.ui").nav_file(6)<CR>', {silent=true, exit=true}},
-    {'7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', {silent=true, exit=true}},
-    {'8', '<cmd>lua require("harpoon.ui").nav_file(8)<CR>', {silent=true, exit=true}},
-    {'9', '<cmd>lua require("harpoon.ui").nav_file(9)<CR>', {silent=true, exit=true}},
-  }
-})
-
--- mark file with Shift + M
--- vim.api.nvim_set_keymap("n", "<S-m>", "<cmd>lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
---
--- -- Toggle quich menu m
--- vim.api.nvim_set_keymap("n", "m", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
---
--- -- Navigate to file number X with m + X
--- vim.api.nvim_set_keymap("n", "m1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "m2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "m3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "m4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "m5", "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "m6", "<cmd>lua require('harpoon.ui').nav_file(6)<CR>", { noremap = true, silent = true })
-
-
-local hint = [[
 _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
 _K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
 ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
@@ -761,6 +703,83 @@ Hydra({
     {'fu', ':GdbFrameUp<CR>', {desc = 'move frame up'}},
     {'fd', ':GdbFrameDown<CR>', {desc = 'move frame down'}},
     {'q', ':GdbDebugStop<CR>', { exit=true, nowait=true, desc = 'quit'}},
+  }
+})
+
+local hint = [[
+_m_: toggle menu   _f_: mark file  _q_: quit     _<ESC>_: quit
+_1_: file 1        _2_: file 2     _3_: file 3   _4_: file 4
+_5_: file 5        _6_: file 6     _7_: file 7   _8_: file 8
+_9_: file 9
+]]
+
+Hydra({
+  name = 'Harpoon mode',
+  -- hint = hint,
+  config = {
+    buffer = bufnr,
+    color = 'pink',
+    invoke_on_body = true,
+    hint = {
+      border = 'rounded',
+    },
+    on_enter = function()
+      vim.cmd 'set showtabline=2'
+    end,
+    on_exit = function()
+      vim.cmd 'set showtabline=0'
+    end,
+  },
+  mode = {'n'},
+  body = "m",
+  heads = {
+    {'q', nil, { exit = true }},
+    {'f', '<cmd>lua require("harpoon.mark").add_file()<CR>', {silent=true, exit=true}},
+    {'<ESC>', nil, { exit = true }},
+    {'m', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', {silent=true}},
+    {'1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', {silent=true, exit=true}},
+    {'2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', {silent=true, exit=true}},
+    {'3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', {silent=true, exit=true}},
+    {'4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', {silent=true, exit=true}},
+    {'5', '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', {silent=true, exit=true}},
+    {'6', '<cmd>lua require("harpoon.ui").nav_file(6)<CR>', {silent=true, exit=true}},
+    {'7', '<cmd>lua require("harpoon.ui").nav_file(7)<CR>', {silent=true, exit=true}},
+    {'8', '<cmd>lua require("harpoon.ui").nav_file(8)<CR>', {silent=true, exit=true}},
+    {'9', '<cmd>lua require("harpoon.ui").nav_file(9)<CR>', {silent=true, exit=true}},
+  }
+})
+
+local hint = [[
+_ts_: toggle show trailing ws   _tr_: remove trailing ws
+_id_: indentation default       _iw_: indentation wide
+_il_: indentation linux         _f_: format code
+_nn_: no numbers
+_q_: quit                       _<ESC>_: quit
+]]
+
+Hydra({
+  name = 'Format mode',
+  hint = hint,
+  config = {
+    buffer = bufnr,
+    color = 'pink',
+    invoke_on_body = true,
+    hint = {
+      border = 'rounded',
+    },
+  },
+  mode = {'n'},
+  body = "<C-f>",
+  heads = {
+    {'q', nil, { exit = true }},
+    {'<ESC>', nil, { exit = true }},
+    {'ts', '<cmd>call ToggleTrailing()<CR>', {silent=true}},
+    {'tr', '<cmd>call StripTrailingWhitespaces()<CR>', {silent=true}},
+    {'id', '<cmd>call IndentDefault()<CR>', {silent=true}},
+    {'iw', '<cmd>call IndentWide()<CR>', {silent=true}},
+    {'il', '<cmd>call IndentLinux()<CR>', {silent=true}},
+    {'nn', '<cmd>set nonumber<CR>', {silent=true}},
+    {'f', '<cmd>Neoformat<CR>', {silent=true}},
   }
 })
 

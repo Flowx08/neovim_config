@@ -7,35 +7,13 @@ set autoindent
 set mouse=a
 set hlsearch
 set cursorline "highlight current line
-set list listchars=tab:»\ ,trail:·,extends:…,precedes:…
+set list listchars=tab:»\ ,trail:□,extends:…,precedes:…
 set colorcolumn=81
 "set scrolloff=9999 "keep cursor in the middle of the screen
 
 set ai "Auto indent
 set si "Smart indent
 set nowrap "don't wrap lines
-
-" indentation styles
-function IndentDefault()
-  set tabstop=2
-  set shiftwidth=2
-  set smarttab
-  set expandtab
-endfunction
-
-function IndentWide()
-  set noexpandtab
-  set tabstop=4
-  set shiftwidth=4
-  set softtabstop=4
-endfunction
-
-function IndentLinux()
-  set noexpandtab
-  set tabstop=8
-  set shiftwidth=8
-  set softtabstop=8
-endfunction
 
 " default indentation mode
 call IndentDefault()
@@ -85,21 +63,3 @@ let g:VM_maps["Select Cursor Up"]   = '<C-k>'        " start selecting up
 
 " For autocompletion plugin
 set completeopt=menu,menuone,noselect
-
-" Highlight trailing whitespaces
-function ToggleTrailing()
-  if !exists('b:toggle_trailing')
-    let b:toggle_trailing = 1
-  endif
-  if b:toggle_trailing == 1
-    highlight TrailingWhitespace ctermbg=red guibg=red
-    match TrailingWhitespace /\s\+$/
-    let b:toggle_trailing = 0
-  else
-    match TrailingWhitespace NONE
-    let b:toggle_trailing = 1
-  endif
-endfunction
-
-"Automatically format files on save
-
