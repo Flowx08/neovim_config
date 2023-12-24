@@ -791,8 +791,14 @@ function ToggleCHeaderSource()
   elseif file:match('.h$') then
     -- Switch to .c
     file = file:gsub('.h$', '.c')
+  elseif file:match('.cpp$') then
+    -- Switch to .h
+    file = file:gsub('.cpp$', '.hpp')
+  elseif file:match('.hpp$') then
+    -- Switch to .c
+    file = file:gsub('.hpp$', '.cpp')
   else
-    print('Not a .c or .h file')
+    print('Not a .c/.cpp or .h/.hpp file')
     return
   end
 
