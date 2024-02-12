@@ -436,4 +436,4 @@ highlight CmpItemKindUnit guifg=#ff0000
 
 highlight SpecialKey guifg=#303030
 highlight Whitespace guifg=#303030
-highlight ColorColumn guifg=#151515 guibg=#151515
+highlight ColorColumn guifg=#330000 guibg=#151515
