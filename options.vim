@@ -1,8 +1,8 @@
 set nocompatible
 set ruler
 
-set number
-"set nonumber
+"set number
+set nonumber
 set autoindent
 set mouse=a
 set hlsearch

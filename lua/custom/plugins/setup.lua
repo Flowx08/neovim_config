@@ -440,32 +440,32 @@ lualine_theme.theme = function()
   }
   return {
     inactive = {
-      a = { fg = colors.white, bg = colors.outerbg, gui = "bold" },
+      a = { fg = colors.white, bg = colors.outerbg },
       b = { fg = colors.white, bg = colors.outerbg },
       c = { fg = colors.white, bg = colors.innerbg },
     },
     visual = {
-      a = { fg = colors.active_color, bg = colors.visual, gui = "bold" },
+      a = { fg = colors.active_color, bg = colors.outerbg },
       b = { fg = colors.active_color, bg = colors.outerbg },
       c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     replace = {
-      a = { fg = colors.active_color, bg = colors.replace, gui = "bold" },
+      a = { fg = colors.active_color, bg = colors.outerbg },
       b = { fg = colors.active_color, bg = colors.outerbg },
       c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     normal = {
-      a = { fg = colors.active_color, bg = colors.normal, gui = "bold" },
+      a = { fg = colors.active_color, bg = colors.outerbg },
       b = { fg = colors.active_color, bg = colors.outerbg },
       c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     insert = {
-      a = { fg = colors.active_color, bg = colors.insert, gui = "bold" },
+      a = { fg = colors.active_color, bg = colors.outerbg },
       b = { fg = colors.active_color, bg = colors.outerbg },
       c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
     command = {
-      a = { fg = colors.active_color, bg = colors.command, gui = "bold" },
+      a = { fg = colors.active_color, bg = colors.outerbg },
       b = { fg = colors.active_color, bg = colors.outerbg },
       c = { fg = colors.hydra_color, bg = colors.innerbg },
     },
@@ -507,14 +507,14 @@ require('lualine').setup {
   inactive_sections = {},
 
   winbar = {
-    lualine_a = {},
-    lualine_b = {lualine_selected, {'filename', path=4,
+    lualine_a = {lualine_selected, {'filename', path=4,
     symbols = {
       modified = '[+]',      -- Text to show when the file is modified.
       readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
       unnamed = '', -- Text to show for unnamed buffers.
       newfile = '[New]',     -- Text to show for newly created file before first write
     }}},
+    lualine_b = {'location', 'progress'},
     lualine_c = {lualine_hydra},
     lualine_x = {'diagnostics','diff'},
     lualine_y = {},
