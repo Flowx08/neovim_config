@@ -50,7 +50,8 @@ syntax on
 
 " Set the vertical split character to  a space (there is a single space
 " after '\ ')
-set fillchars+=vert:\ 
+" set fillchars+=vert:\ 
+set fillchars+=vert:\|
 
 " Limit popup menu height
 set pumheight=30

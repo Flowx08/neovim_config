@@ -1,6 +1,6 @@
 -- Set <space> as the leader key
 -- See `:help mapleader`
---  NOTE: Must happen before plugins are required 
+--  NOTE: Must happen before plugins are required
 --  (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -31,7 +31,7 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling 
+      -- NOTE: `opts = {}` is the same as calling
       -- `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
@@ -151,4 +151,31 @@ function terminal_cdir()
   vim.api.nvim_set_current_dir(wdir)
   -- Send A key to go insert mode
   vim.api.nvim_feedkeys('A', 'n', false)
+end
+
+function ResizeCurrentWindowAndDistributeRest(target_width)
+  -- Get the total width of the Neovim
+  local total_width = vim.api.nvim_eval('&columns')
+
+  -- Resize the current window
+  vim.api.nvim_win_set_width(0, target_width)
+
+  -- Calculate the remaining width
+  local remaining_width = total_width - target_width
+
+  -- Count the number of windows except the current one
+  local windows = vim.api.nvim_tabpage_list_wins(0)
+  local num_other_windows = #windows - 1
+
+  if num_other_windows <= 0 then return end  -- If there are no other windows, do nothing more
+
+  -- Calculate the width to distribute to each of the other windows
+  local width_per_window = math.floor(remaining_width / num_other_windows)
+
+  -- Set the width for each of the other windows
+  for _, win in pairs(windows) do
+    if win ~= vim.api.nvim_get_current_win() then  -- Skip the current window
+      vim.api.nvim_win_set_width(win, width_per_window)
+    end
+  end
 end

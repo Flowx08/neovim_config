@@ -272,7 +272,7 @@ call s:X("Todo","808080","","bold","","")
 
 call s:X("StatusLine","000000","dddddd","italic","Black","White")
 call s:X("StatusLineNC","ffffff","403c41","italic","White","Black")
-call s:X("VertSplit","777777","403c41","italic","Black","Black")
+call s:X("VertSplit","222222","222222","italic","Black","Black")
 
 call s:X("Folded","a0a8b0","384048","italic","black","")
 call s:X("FoldColumn","a0a8b0","384048","","","")
@@ -433,6 +433,7 @@ highlight CmpItemKindMethod guifg=#fad07a
 highlight CmpItemKindKeyword guifg=#8197bf
 highlight CmpItemKindProperty guifg=#ff0000
 highlight CmpItemKindUnit guifg=#ff0000
+highlight VertSplit guifg=#202020
 
 highlight SpecialKey guifg=#303030
 highlight Whitespace guifg=#303030
