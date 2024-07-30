@@ -30,7 +30,14 @@ autocmd VimResized * exe "normal \<c-w>="
 
 " Format the status line
 set statusline=\ %t
-set clipboard+=unnamed
+
+set clipboard=unnamed
+if has("unix")
+  let s:uname = system("echo -n \"$(uname)\"")
+  if !v:shell_error && s:uname == "Linux"
+    set clipboard=unnamedplus
+  endif
+endif
 
 set history=1000        "remember more commands and search history
 set undolevels=1000     "use many much levels of undo

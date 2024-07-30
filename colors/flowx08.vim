@@ -396,9 +396,12 @@ hi CursorLineNr term=bold cterm=bold gui=bold guifg=#9999FF
 hi vertsplit guifg=fg guibg=bg
 
 "Set background transparent
-highlight LineNr ctermbg=NONE guibg=NONE guifg=#444444
-hi! Normal ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
+" highlight LineNr ctermbg=NONE guibg=NONE guifg=#444444
+" hi! Normal ctermbg=NONE guibg=NONE
+" hi! NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=black guibg=black guifg=#444444
+hi! Normal ctermbg=black guibg=black
+hi! NonText ctermbg=black guibg=black
 
 "Hide black lines ~ 
 hi! EndOfBuffer ctermbg=black ctermfg=black guibg=black guifg=black
