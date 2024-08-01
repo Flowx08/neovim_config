@@ -76,3 +76,7 @@ map('n', '<C-w-Up>', ':wincmd k<CR>', opts)
 map('n', '<C-w-Down>', ':wincmd j<CR>', opts)
 map('n', '<C-w-Left>', ':wincmd h<CR>', opts)
 map('n', '<C-w-Right>', ':wincmd l<CR>', opts)
+
+-- Copy over SSH
+map('n', '<C-c>', ':OSCYankOperator<cr>', opts)
+map('v', '<C-c>', ':OSCYankVisual<cr>', opts)

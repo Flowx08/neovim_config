@@ -103,6 +103,7 @@ require('lazy').setup({
   {'anuvyklack/hydra.nvim', lazy = true},
   'sbdchd/neoformat',
   'ggandor/leap.nvim',
+  'ojroques/vim-oscyank',
   'nvim-lualine/lualine.nvim',
   {'sakhnik/nvim-gdb', lazy = true},
   {'mfussenegger/nvim-dap', lazy = true},
