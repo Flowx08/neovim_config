@@ -104,6 +104,7 @@ require('lazy').setup({
   'sbdchd/neoformat',
   'ggandor/leap.nvim',
   'ojroques/vim-oscyank',
+  'sindrets/diffview.nvim',
   'nvim-lualine/lualine.nvim',
   {'sakhnik/nvim-gdb', lazy = true},
   {'mfussenegger/nvim-dap', lazy = true},
