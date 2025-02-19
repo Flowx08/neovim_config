@@ -215,7 +215,7 @@ lspconfig.clangd.setup(
 
 lspconfig.pyright.setup({})
 lspconfig.rust_analyzer.setup({})
-lspconfig.tsserver.setup({})
+lspconfig.ts_ls.setup({})
 lspconfig.glslls.setup({})
 lspconfig.bashls.setup({})
 
@@ -530,7 +530,7 @@ require('lualine').setup {
       unnamed = '', -- Text to show for unnamed buffers.
       newfile = '[New]',     -- Text to show for newly created file before first write
     }}},
-    lualine_x = {'diagnostics', 'diff'},
+    lualine_x = {},
     lualine_y = {},
     lualine_z = {}
   },
@@ -808,4 +808,5 @@ end
 
 vim.api.nvim_create_user_command('ToggleCH', ToggleCHeaderSource, {})
 
-
+require("nvim-tree").setup()
+require('hex').setup()

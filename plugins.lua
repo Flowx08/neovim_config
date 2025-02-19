@@ -102,6 +102,7 @@ require('lazy').setup({
   'j-hui/fidget.nvim',
   {'anuvyklack/hydra.nvim', lazy = true},
   'sbdchd/neoformat',
+  'nvim-tree/nvim-tree.lua',
   'ggandor/leap.nvim',
   'ojroques/vim-oscyank',
   'sindrets/diffview.nvim',
@@ -113,6 +114,7 @@ require('lazy').setup({
   {'catppuccin/nvim', lazy = true},
   {'NeogitOrg/neogit', lazy = true, tag = 'v0.0.1'},
   'lewis6991/gitsigns.nvim',
+  'RaafatTurki/hex.nvim',
 }, {
   ui = {
     border = 'single'
