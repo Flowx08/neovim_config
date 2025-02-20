@@ -437,6 +437,7 @@ highlight CmpItemKindKeyword guifg=#8197bf
 highlight CmpItemKindProperty guifg=#ff0000
 highlight CmpItemKindUnit guifg=#ff0000
 highlight VertSplit guifg=#202020
+highlight WinSeparator guifg=#202020
 
 highlight SpecialKey guifg=#303030
 highlight Whitespace guifg=#303030
