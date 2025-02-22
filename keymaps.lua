@@ -53,6 +53,11 @@ map('n', 'vv', ':vsplit<cr>', opts)
 map('n', 'vo', ':split<cr>', opts)
 map('n', 'vn', ':NoNeckPain<cr>', opts)
 
+-- Formatting
+map('n', '<C-f>', ':Neoformat<cr>', opts)
+map('n', '<C-g>', ':call IndentLinux()<cr>', opts)
+map('n', '<C-h>', ':call IndentDefault()<cr>', opts)
+
 
 map('n', '<C-e>', ':lua vim.diagnostic.open_float()<cr>', opts)
 

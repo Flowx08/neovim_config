@@ -100,7 +100,6 @@ require('lazy').setup({
   {'stevearc/oil.nvim', lazy = true},
   'windwp/nvim-autopairs',
   'j-hui/fidget.nvim',
-  {'anuvyklack/hydra.nvim', lazy = true},
   'sbdchd/neoformat',
   'nvim-tree/nvim-tree.lua',
   'ggandor/leap.nvim',
